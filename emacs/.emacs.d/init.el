@@ -30,10 +30,5 @@
   "golang.el"
 ))
 
-;; (load-user-file "keyboard.el")
-
-;; (let ((bar (+ 1 20)))
-;;   (if (> bar 10)
-;;       (message "foo = %d" bar)
-;;       (message "too little %d" bar)
-;; ))
+; we want remote accessibility
+(server-start)
