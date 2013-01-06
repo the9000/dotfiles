@@ -10,6 +10,8 @@ for extended key combos.
 * `colors.el`: color settings factored out.
 The `~/.emacs` file can be drastically reduced.
 
+# git/
+* `.gitconfig`: useful aliases. 
 
 # vim
 TODO
