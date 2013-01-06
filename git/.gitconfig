@@ -1,0 +1,29 @@
+[user]
+	name = <FILL IN!>
+	email = <FILL IN!>
+[color]
+    filemode = false
+    diff = auto
+    status = auto
+    branch = auto
+    pager = true
+[alias]
+    b = branch
+    ci = commit -v
+    co = checkout
+    cob = checkout -b
+    d = diff
+    l = log
+    lg = log --graph --pretty=format:'%C(green)%h%Creset -%C(bold blue)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset' --abbrev-commit --date=relative
+    lga = log --graph --pretty=format:'%C(green)%h%Creset -%C(bold blue)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset' --abbrev-commit --date=relative --branches
+    st = status
+    fixup = !sh -c 'git commit -a -m \"fixup! $(git log -1 --format='%s' $@)\"' -
+    squ = !sh -c 'git commit -a -m \"squash! $(git log -1 --format='%s' $@)\"' -
+    ri = rebase --interactive
+    rc = rebase --continue
+    last = log -p -n 1
+    unadd = reset
+[core]
+    pager = less -FRSX
+    #excludes = ~/.gitexcludes
+
