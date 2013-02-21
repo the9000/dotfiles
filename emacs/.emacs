@@ -7,4 +7,8 @@
 (setq-default indent-tabs-mode nil)    ; use only spaces and no tabs
 (setq default-tab-width 4)
 
-;; that's it.
+(global-linum-mode t) ; we want line numbers everywhere
+
+(setq show-trailing-whitespace t) ;; highlight it everywhere
+
+;; That's it.

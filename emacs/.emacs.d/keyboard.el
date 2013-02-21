@@ -11,5 +11,8 @@
 (global-set-key (kbd "C-X <down>") 'next-multiframe-window)
 
 (global-set-key (kbd "C-j") 'join-line)
+(global-set-key (kbd "C-c C-j") 'join-line)
+
 (global-set-key (kbd "s-w") 'kill-this-buffer)
 (global-set-key (kbd "C-X C-\\") 'kill-this-buffer)
+(global-set-key (kbd "s-<f5>") 'revert-buffer)
