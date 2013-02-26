@@ -2,6 +2,7 @@
 * `setup-prompt`: tries to create a well-visible prompt usable from
   inside terminal emulators,  Linux console, and via tmux.
 * `setup-keyboard`: adds an alternate keyboard layout if under X.
+* `setup-term`: sets TERM to 256 colors circumventing an issue in vte.
 
 # emacs/
 * `~/.emacs.d/init.el`: load user config files, skipping non-existent ones.
