@@ -7,8 +7,8 @@
 (global-set-key (kbd "C-S-v") 'x-clipboard-yank)
 
 ; C-X PgUp / PgDn: windows
-(global-set-key (kbd "C-X <up>") 'previous-multiframe-window)
-(global-set-key (kbd "C-X <down>") 'next-multiframe-window)
+(global-set-key (kbd "C-X <down>") 'previous-multiframe-window)
+(global-set-key (kbd "C-X <up>") 'next-multiframe-window)
 
 ; C-PgUp / PgDn: windows, a la terminals, browsers, etc
 (global-set-key (kbd "<C-next>") 'previous-multiframe-window)
