@@ -10,6 +10,10 @@
 (global-set-key (kbd "C-X <up>") 'previous-multiframe-window)
 (global-set-key (kbd "C-X <down>") 'next-multiframe-window)
 
+; C-PgUp / PgDn: windows, a la terminals, browsers, etc
+(global-set-key (kbd "<C-next>") 'previous-multiframe-window)
+(global-set-key (kbd "<C-prior>") 'next-multiframe-window)
+
 (global-set-key (kbd "C-j") 'join-line)
 (global-set-key (kbd "C-c C-j") 'join-line)
 
