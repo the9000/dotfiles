@@ -1,7 +1,14 @@
 # should be sourced by shell
-
 # prompt tweaks
-function prompt_colors
+
+
+feature() {
+ # name fg
+ # name fg on bg
+ # name on bg 
+}
+
+prompt_colors()
 # sets C_ACCESS, C_SUPER, C_TITLE, C_NOCOLOR to esc sequences if xterm
 # else sets them to empty values
 {
@@ -31,16 +38,24 @@ else
 fi
 }
 
-host_part=$(hostname | head -c 7)
-time_part='$(date +"%H:%M")'
+_host() {
+    hostname | head -c 7
+}
+
+_time() {
+    echo '$(date +"%H:%M")'
+}
+
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     # ^^^ from stock bashrc
     prompt_colors
     if [ -z "$DISPLAY" ] && [ "$TERM" != 'xterm' ]; then 
-        C_TITLE="" # undefine if no X
+        C_TITLE="" # unset if no X
     fi
     # including username
     #PS1="${C_NOCOLOR}\u@${C_ACCESS}${host_part} ${time_part} ${C_USER}\\$ ${C_NOCOLOR}${C_TITLE}"
+    PS1=''
+    PS1="${PS1}${C_ACCESS}$(_host)"
     # without username
     PS1="${C_ACCESS}${host_part} ${time_part} ${C_USER}\\$ ${C_NOCOLOR}${C_TITLE}"
 else
