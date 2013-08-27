@@ -28,6 +28,8 @@
   "colors.el"
   "python.el"
   "golang.el"
+  ;; last
+  "appearance.el"
 ))
 
 ; we want remote accessibility
