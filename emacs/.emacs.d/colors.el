@@ -1,7 +1,10 @@
 ;; Color theme settings
 
+(if (not (fboundp 'color-theme))
+  (color-theme-initialize)
+  nil
+)
 (require 'color-theme)
-;;(color-theme-initialize)
 (color-theme-gray30)
 ; TODO: consider a fully custom theme
 
