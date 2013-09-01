@@ -1,12 +1,16 @@
 [user]
-	name = <FILL IN!>
-	email = <FILL IN!>
+	name = Dmitry Cheryasv
+	email = dmitry.cheryasov@gmail.com
 [color]
     filemode = false
     diff = auto
     status = auto
     branch = auto
     pager = true
+[color "status"]
+    added = green bold
+    changed = cyan bold
+    untracked = yellow dim
 [alias]
     b = branch
     ci = commit -v
