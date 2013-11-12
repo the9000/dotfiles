@@ -1,5 +1,8 @@
-;; initialization file to load other init files.
-;; see http://stackoverflow.com/questions/2079095/
+;; Initialization file to load other init files.
+;; The init directory /init.d is loked-for under either user-specified
+;; path or ~/.emacs.d. Any elisp files found there are loaded in
+;; alpahbetical order, like in site-start.d. Unix-style init.d file
+;; naming, like 01-foo.el, 05-bar.el is encouraged.
 
 ;; detect user initialization directory
 (defconst user-init-dir
@@ -9,26 +12,15 @@
          user-init-directory)
         (t "~/.emacs.d/")))
 
-;; Utility function to load files on by one.
-(defun load-user-file (file)
-  (interactive "f")
-  (let ((fname (expand-file-name file user-init-dir)))
-    (if (file-readable-p fname)
-      ;; Load a file in current user's configuration directory
-      (and (load-file fname) (message "Loaded %s" fname))
-      (message "Could not load %s" fname)
-    )
+;; Load each config 'module' found in init.d
+(defun load-init-dir-files (dir)
+  (mapc (lambda (fname)
+   (if (file-readable-p fname)
+         ;; Load a file in current user's configuration directory
+         (load-file fname)
+         (message "Could not load %s" fname)
+    ))
+    (directory-files dir  t ".*\\.el$")
   )
 )
-
-;; Load each config 'module'. Easy to comment out entries.
-(mapc 'load-user-file '(
-  "keyboard.el"
-  "keyboard-chrome.el"
-  "colors.el"
-  "python.el"
-  "golang.el"
-))
-
-; we want remote accessibility
-(server-start)
+(load-init-dir-files (concat user-init-dir "/init.d"))
