@@ -1,0 +1,49 @@
+#!/bin/sh
+
+if git rev-parse --verify HEAD >/dev/null 2>&1; then
+  against=HEAD
+else
+  # magical treeish present in an empty repo
+  against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+fi
+
+hash_comment_re='#\s*XXX'
+c_comment_re='(//\s*XXX)|(/\*+\s*XXX)'
+slash_star_comment_re='/\*+\s*XXX'
+dash_comment_re='--\s*XXX'
+
+declare -A file_masks  # key is filename regexp, value is comment regexp
+file_masks['.*\.css']=${slash_star_comment_re}
+file_masks['.*\.java']=${c_comment_re}
+file_masks['.*\.js']=${c_comment_re}
+file_masks['.*\.hs']=${dash_comment_re}
+file_masks['.*\.py']=${hash_comment_re}
+file_masks['.*\.sh']=${hash_comment_re}
+file_masks['.*\.sql']=${dash_comment_re}
+
+# copy git diff's approach to color to grep
+if git config --get-colorbool diff.ui; then
+    GREP_COLOR='--color=always'
+else
+    GREP_COLOR=''
+fi
+
+status=0  # 0 is success
+
+for FILE in $(git diff-index --name-status ${against} -- | cut -c3-); do
+    echo "Chcecking ${FILE}"
+    for file_re in ${!file_masks[@]}; do
+        if [[ "$FILE" =~ ${file_re} ]]; then
+            echo "It is of known type ${file_re}"
+            comment_re=${file_masks[${file_re}]}
+            findings=$(grep ${GREP_COLOR} -n -B 2 -P ${comment_re} ${FILE})
+            if [ -n "${findings}" ]; then
+                echo "*** Cannot commit $FILE"
+                printf "${findings}\n\n"
+                status=1
+            fi
+        fi
+    done
+done
+
+exit $status
