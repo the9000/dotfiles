@@ -24,3 +24,4 @@
  uniquify-buffer-name-style 'post-forward
  uniquify-separator ":")
 
+(tool-bar-mode 0)
