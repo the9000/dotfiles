@@ -1,5 +1,5 @@
 ;; Initialization file to load other init files.
-;; The init directory /init.d is loked-for under either user-specified
+;; The init directory /init.d is looked for under either user-specified
 ;; path or ~/.emacs.d. Any elisp files found there are loaded in
 ;; alpahbetical order, like in site-start.d. Unix-style init.d file
 ;; naming, like 01-foo.el, 05-bar.el is encouraged.
