@@ -7,6 +7,8 @@ color_by_name[black]=0
 color_by_name[red]=1
 color_by_name[green]=2
 color_by_name[blue]=4
+color_by_name[purple]=5
+color_by_name[cyan]=6
 color_by_name[white]=7
 # TODO more
 
