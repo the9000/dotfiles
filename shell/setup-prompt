@@ -1,12 +1,8 @@
 # should be sourced by bash
 # prompt tweaks
 
+source colors.sh
 
-feature() {
- # name fg
- # name fg on bg
- # name on bg 
-}
 
 prompt_colors()
 # sets C_ACCESS, C_SUPER, C_TITLE, C_NOCOLOR to esc sequences if xterm
