@@ -15,17 +15,17 @@ d_exitcode() {
     # dynamically sets background color depending on $?
     local zero_bg=$(hl_color 22 green)
     local nonzero_bg='red'
-    local fg='gray' # optional foreground color
+    local fg=$(hl_color 'yellow' 'black') # optional foreground color
     #
     local zattr="$(pcolor $fg on $zero_bg)"
     local nonzattr="$(pcolor $fg on $nonzero_bg)"
-    echo -n '$([ $? -ne 0 ] && echo -n "'${nonzattr}'" || echo -n "'${zattr}'")'
+    echo -n '$(N=$?;[ $N -ne 0 ] && echo -n "'${nonzattr}' <$N>" || echo -n "'${zattr}'")'
 }
 
 p_host() {
-    local normal_fg=gray           # default host name color
-    local special_fg=$(hl_color 148 brown)
-    local bg=$(hl_color 22 green) # background
+    local normal_fg='gray'       # default host name color
+    local special_fg=$(hl_color 148 'cyan')
+    local bg=$(hl_color 22 'blue') # background
     #
     local fg
     local underline=''
@@ -40,7 +40,7 @@ p_host() {
         underline='underline'
         underline_off_code="$(pcolor no_underline)"
     fi
-    printf "$(pcolor $fg on $bg $underline)${host_part}${underline_off_code}"
+    printf "$(pcolor $fg on $bg $underline) ${host_part}${underline_off_code}"
 }
 
 prompt_colors()
