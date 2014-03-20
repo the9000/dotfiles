@@ -3,6 +3,45 @@
 
 source colors.sh
 
+# TODO: do everything within one function that prints PS1, to keep namespace clean.
+
+pcolor() {
+    # Same as color(), but adds \[ and \] to make the color setting prompt-transparent.
+    echo -n '\['$(color $*)'\]'
+}
+
+
+d_exitcode() {
+    # dynamically sets background color depending on $?
+    local zero_bg=$(hl_color 22 green)
+    local nonzero_bg='red'
+    local fg='gray' # optional foreground color
+    #
+    local zattr="$(pcolor $fg on $zero_bg)"
+    local nonzattr="$(pcolor $fg on $nonzero_bg)"
+    echo -n '$([ $? -ne 0 ] && echo -n "'${nonzattr}'" || echo -n "'${zattr}'")'
+}
+
+p_host() {
+    local normal_fg=gray           # default host name color
+    local special_fg=$(hl_color 148 brown)
+    local bg=$(hl_color 22 green) # background
+    #
+    local fg
+    local underline=''
+    local underline_off_code=''
+    host_part=$(hostname)
+    if [[ ${host_part} =~ corp\.google\.com ]]; then
+        fg=${special_fg}
+    else
+        fg=${normal_fg}
+    fi
+    if [ -n "$SSH_CLIENT" ]; then
+        underline='underline'
+        underline_off_code="$(pcolor no_underline)"
+    fi
+    printf "$(pcolor $fg on $bg $underline)${host_part}${underline_off_code}"
+}
 
 prompt_colors()
 # sets C_ACCESS, C_SUPER, C_TITLE, C_NOCOLOR to esc sequences if xterm
@@ -45,7 +84,8 @@ fi
 host_part=$(hostname | head -c 7)
 time_part='$(date +"%H:%M")'
 prompt_colors
-PS1="${C_ACCESS}${host_part} ${time_part} ${C_USER}\\$ ${C_NOCOLOR}${C_TITLE}"
+
+# example: PS1="$(d_exitcode) $(t) $(p_host) $(pcolor none)\n\$ "
 
 unset host_part time_part
 

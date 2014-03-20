@@ -1,4 +1,5 @@
-# color-setting helper
+# color-setting helperhost_part=$(hostname | head -c 7)
+
 
 # name -> ANSI esc {3,4}Nm code
 # NOTE: space in bracket matters!
@@ -19,7 +20,16 @@ color_by_name[lt_blue]=12
 color_by_name[lt_purple]=13
 color_by_name[lt_cyan]=14
 color_by_name[white]=15
-# TODO more
+
+COLORS_MAX=$(tput colors)
+
+hl_color() {
+    # $1 is for high-color mode, $2 for 8-color basic mode.
+    # prints one of them, depending on COLORS_MAX.
+    if [ ${COLORS_MAX} -gt 8 ]; then printf "%s" "$1";
+    else printf "%s" "$2";
+    fi
+}
 
 color() {
 # possible invocation arguments
@@ -27,13 +37,24 @@ color() {
 # "yellow"
 # "yellow on blue"
 # "on blue"
-# "default"
+# "underline" -- can be combined with colors
+# "no_underline"
     local is_bg='' # empty is false
     local result=''
     while [ -n "$1" ]; do
         if [ $1 = 'none' ]; then
-            result="$(tput sgr none)"
+            result="$(tput sgr0)"
             break
+        fi
+        if [ $1 = 'underline' ]; then
+            result="${result}$(tput smul)"
+            shift
+            continue
+        fi
+        if [ $1 = 'no_underline' ]; then
+            result="${result}$(tput rmul)"
+            shift
+            continue
         fi
         if [ $1 = 'on' ]; then
             shift
@@ -49,3 +70,17 @@ color() {
     echo -n $result
 }
 
+
+# A fun utility:
+print_256_color_square() {
+    local c c1 c2
+    for c1 in {0..15}; do 
+        for c2 in {0..15}; do 
+            c=$(( c1 + 16*c2 )); 
+            color $(( 93 - c1*2 - c2*2 )) on $c; 
+            printf " %03d " $c; 
+        done; 
+        color none; 
+        echo; 
+    done
+}
