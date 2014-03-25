@@ -5,21 +5,33 @@ source colors.sh
 
 # TODO: do everything within one function that prints PS1, to keep namespace clean.
 
+P_JOINER="▅" # TODO: handle non-utf8 locales
+
 pcolor() {
     # Same as color(), but adds \[ and \] to make the color setting prompt-transparent.
-    echo -n '\['$(color $*)'\]'
+    # Without arguments, prints nothing at all.
+    [ -n "$1" ] && echo -n '\['$(color $*)'\]'
 }
 
-
-d_exitcode() {
+p_exitcode() {
     # dynamically sets background color depending on $?
-    local zero_bg=$(hl_color 22 green)
+    # ? local zero_bg=$(hl_color 22 green)
     local nonzero_bg='red'
-    local fg=$(hl_color 'yellow' 'black') # optional foreground color
+    local fg=$(hl_color 'white' 'black') # optional foreground color
+    local next_bg=$(hl_color 22 green) # for the joiner block
     #
-    local zattr="$(pcolor $fg on $zero_bg)"
+    # ? local zattr="$(pcolor $fg on $zero_bg)"
     local nonzattr="$(pcolor $fg on $nonzero_bg)"
-    echo -n '$(N=$?;[ $N -ne 0 ] && echo -n "'${nonzattr}' <$N>" || echo -n "'${zattr}'")'
+    local nextattr="$(pcolor $next_bg)"
+    local nextbgattr="$(pcolor on $next_bg)"
+    echo -n '$(N=$?;[ $N -ne 0 ] && echo -n "'${nonzattr}'$N '${nextattr}${P_JOINER}${nextbgattr}' ")'
+    # ? ...' || echo -n "'${zattr}'")'
+}
+
+p_time() {
+    local bg=$(hl_color 22 green)
+    local fg=$(hl_color 'yellow' 'black') # optional foreground color
+    echo "$(pcolor $fg on $bg)"'$(date +%H:%M)'
 }
 
 p_host() {
@@ -85,7 +97,8 @@ host_part=$(hostname | head -c 7)
 time_part='$(date +"%H:%M")'
 prompt_colors
 
-# example: PS1="$(d_exitcode) $(t) $(p_host) $(pcolor none)\n\$ "
+# example: 
+PS1="$(p_exitcode) $(p_time) $(p_host) $(pcolor none)\n\$ "
 
 unset host_part time_part
 
