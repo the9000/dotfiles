@@ -55,6 +55,36 @@ p_host() {
     printf "$(pcolor $fg on $bg $underline) ${host_part}${underline_off_code}"
 }
 
+p_pwd_git() {
+    # Lets show current directory.
+    # If under git, shows repo's base dir, current branch, and commit status
+    local bg=$(hl_color 22 blue)
+    local plain_fg=$(hl_color 82 cyan)
+    local repo_fg=$(hl_color 253 gray)
+    # more to come
+    local plain_attrs="$(color ${plain_fg} on ${bg})"
+    local git_tree_attrs="$(color ${repo_fg})"
+    printf '$(show_git_pwd "'"${plain_attrs}"'" "'"${git_tree_attrs}"'")'
+}
+
+show_git_pwd() {
+    local nongit_attrs=$1
+    shift
+    local git_attrs=$1
+    # 
+    local git_prefix=$(git rev-parse --show-prefix 2> /dev/null)
+    if [ -n "${git_prefix}" ]; then
+        local pwd_slash="${PWD}/"
+        local git_base=${pwd_slash%${git_prefix}}
+        local non_git_prefix=$(dirname "$git_base")"/"
+        local worktree_path=${PWD#${non_git_prefix}}
+        printf "${nongit_attrs}${non_git_prefix}${git_attrs}${worktree_path}"
+    else
+        # git did not work. show a regular path
+        printf "${nongit_attrs}${PWD}"
+    fi    
+}
+
 prompt_colors()
 # sets C_ACCESS, C_SUPER, C_TITLE, C_NOCOLOR to esc sequences if xterm
 # else sets them to empty values
@@ -98,7 +128,7 @@ time_part='$(date +"%H:%M")'
 prompt_colors
 
 # example: 
-PS1="$(p_exitcode) $(p_time) $(p_host) $(pcolor none)\n\$ "
+PS1="$(p_exitcode)$(p_time) $(p_host):$(p_pwd_git) $(pcolor none)\n\$ "
 
 unset host_part time_part
 
