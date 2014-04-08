@@ -5,7 +5,7 @@ source colors.sh
 
 # TODO: do everything within one function that prints PS1, to keep namespace clean.
 
-P_JOINER="▅" # TODO: handle non-utf8 locales
+# P_JOINER="▅" # TODO: handle non-utf8 locales
 
 pcolor() {
     # Same as color(), but adds \[ and \] to make the color setting prompt-transparent.
@@ -15,22 +15,20 @@ pcolor() {
 
 p_exitcode() {
     # dynamically sets background color depending on $?
-    # ? local zero_bg=$(hl_color 22 green)
     local nonzero_bg='red'
-    local fg=$(hl_color 'white' 'black') # optional foreground color
-    local next_bg=$(hl_color 22 green) # for the joiner block
+    local fg=$(hl_color 'white' 'gray') # optional foreground color
     #
     # ? local zattr="$(pcolor $fg on $zero_bg)"
     local nonzattr="$(pcolor $fg on $nonzero_bg)"
     local nextattr="$(pcolor $next_bg)"
     local nextbgattr="$(pcolor on $next_bg)"
-    echo -n '$(N=$?;[ $N -ne 0 ] && echo -n "'${nonzattr}'$N '${nextattr}${P_JOINER}${nextbgattr}' ")'
+    echo -n '$(N=$?;[ $N -ne 0 ] && echo -n "'${nonzattr}'$N ")'
     # ? ...' || echo -n "'${zattr}'")'
 }
 
 p_time() {
-    local bg=$(hl_color 22 green)
-    local fg=$(hl_color 'yellow' 'black') # optional foreground color
+    local bg='green'
+    local fg='black' # optional foreground color
     echo "$(pcolor $fg on $bg)"'$(date +%H:%M)'
 }
 
@@ -60,7 +58,7 @@ p_pwd_git() {
     # If under git, shows repo's base dir, current branch, and commit status
     local bg=$(hl_color 22 blue)
     local plain_fg=$(hl_color 82 cyan)
-    local repo_fg=$(hl_color 253 gray)
+    local repo_fg="bold $(hl_color 253 gray)"
     # more to come
     local plain_attrs="$(color ${plain_fg} on ${bg})"
     local git_tree_attrs="$(color ${repo_fg})"
@@ -71,14 +69,25 @@ show_git_pwd() {
     local nongit_attrs=$1
     shift
     local git_attrs=$1
+    shift
+    local clean_branch_attrs=${1:-${nongit_attrs}}
+    shift
+    local modified_branch_attrs=${1:-${git_attrs}}
     # 
     local git_prefix=$(git rev-parse --show-prefix 2> /dev/null)
     if [ -n "${git_prefix}" ]; then
+        # dirs
         local pwd_slash="${PWD}/"
         local git_base=${pwd_slash%${git_prefix}}
         local non_git_prefix=$(dirname "$git_base")"/"
         local worktree_path=${PWD#${non_git_prefix}}
+        # branch + status
+        local branch=$(git describe --contains --all HEAD)
+        local branch_attrs=$(git diff --no-ext-diff --quiet --exit-code \
+            && printf "${clean_branch_attrs}" || printf "${modified_branch_attrs}")
+        # final output
         printf "${nongit_attrs}${non_git_prefix}${git_attrs}${worktree_path}"
+        printf "${branch_attrs} @ ${branch}"
     else
         # git did not work. show a regular path
         printf "${nongit_attrs}${PWD}"
@@ -128,7 +137,7 @@ time_part='$(date +"%H:%M")'
 prompt_colors
 
 # example: 
-PS1="$(p_exitcode)$(p_time) $(p_host):$(p_pwd_git) $(pcolor none)\n\$ "
+PS1="$(pcolor none)$(p_exitcode)$(p_time) $(p_host):$(p_pwd_git) $(pcolor none)\n\$ "
 
 unset host_part time_part
 

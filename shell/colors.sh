@@ -39,6 +39,7 @@ color() {
 # "on blue"
 # "underline" -- can be combined with colors
 # "no_underline"
+# "bold" (note): there's no 'no_bold', use 'none'
     local is_bg='' # empty is false
     local result=''
     while [ -n "$1" ]; do
@@ -53,6 +54,11 @@ color() {
         fi
         if [ $1 = 'no_underline' ]; then
             result="${result}$(tput rmul)"
+            shift
+            continue
+        fi
+        if [ $1 = 'bold' ]; then
+            result="${result}$(tput bold)"
             shift
             continue
         fi
