@@ -5,8 +5,6 @@ source colors.sh
 
 # TODO: do everything within one function that prints PS1, to keep namespace clean.
 
-# P_JOINER="▅" # TODO: handle non-utf8 locales
-
 pcolor() {
     # Same as color(), but adds \[ and \] to make the color setting prompt-transparent.
     # Without arguments, prints nothing at all.
@@ -23,7 +21,6 @@ p_exitcode() {
     local nextattr="$(pcolor $next_bg)"
     local nextbgattr="$(pcolor on $next_bg)"
     echo -n '$(N=$?;[ $N -ne 0 ] && echo -n "'${nonzattr}'$N ")'
-    # ? ...' || echo -n "'${zattr}'")'
 }
 
 p_time() {
@@ -59,10 +56,13 @@ p_pwd_git() {
     local bg=$(hl_color 22 blue)
     local plain_fg=$(hl_color 82 cyan)
     local repo_fg="bold $(hl_color 253 gray)"
+    local clean_fg="none $(hl_color green black) on $(hl_color 22 green)"
+    local modified_fg="none $(hl_color 220 black) on $(hl_color 22 brown)"
     # more to come
-    local plain_attrs="$(color ${plain_fg} on ${bg})"
-    local git_tree_attrs="$(color ${repo_fg})"
-    printf '$(show_git_pwd "'"${plain_attrs}"'" "'"${git_tree_attrs}"'")'
+    local plain_attrs="$(pcolor ${plain_fg} on ${bg})"
+    local git_tree_attrs="$(pcolor ${repo_fg})"
+    printf '$(show_git_pwd "'${plain_attrs}'" "'${git_tree_attrs}'" "'
+    printf $(pcolor ${clean_fg})'" "'$(pcolor ${modified_fg})'")'
 }
 
 show_git_pwd() {

@@ -44,8 +44,9 @@ color() {
     local result=''
     while [ -n "$1" ]; do
         if [ $1 = 'none' ]; then
-            result="$(tput sgr0)"
-            break
+            result="${result}$(tput sgr0)"
+            shift
+            continue
         fi
         if [ $1 = 'underline' ]; then
             result="${result}$(tput smul)"
