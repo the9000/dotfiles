@@ -56,8 +56,8 @@ p_pwd_git() {
     local bg=$(hl_color 22 blue)
     local plain_fg=$(hl_color 82 cyan)
     local repo_fg="bold $(hl_color 253 gray)"
-    local clean_fg="none $(hl_color green black) on $(hl_color 22 green)"
-    local modified_fg="none $(hl_color 220 black) on $(hl_color 22 brown)"
+    local clean_fg="none $(hl_color lt_green black) on $(hl_color 22 green)"
+    local modified_fg="none $(hl_color 220 black) on $(hl_color 58 brown)"
     # more to come
     local plain_attrs="$(pcolor ${plain_fg} on ${bg})"
     local git_tree_attrs="$(pcolor ${repo_fg})"
