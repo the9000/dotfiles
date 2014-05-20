@@ -65,7 +65,22 @@ p_pwd_git() {
     printf $(pcolor ${clean_fg})'" "'$(pcolor ${modified_fg})'")'
 }
 
+cut_path_to_home() {
+    local path=${1:-$PWD}
+    local cut_path=${path#${HOME}}
+    if [ "${cut_path}" != "${path}" ]; then
+        printf '~'"${cut_path}"
+    else
+        printf "${path}"
+    fi
+}
+
 show_git_pwd() {
+    # sets the folloving env vars:
+    # PWD_NONGIT: part of PWD before git tree
+    # PWD_GIT_TREE: part of path belonging to a git work tree (or empty)
+    # PWD_GIT_BRANCH: name of current branch (or empty)
+    # PWD_GIT_CLEAN: is set, the tree is clean
     local nongit_attrs=$1
     shift
     local git_attrs=$1
@@ -73,7 +88,7 @@ show_git_pwd() {
     local clean_branch_attrs=${1:-${nongit_attrs}}
     shift
     local modified_branch_attrs=${1:-${git_attrs}}
-    # 
+    #
     local git_prefix=$(git rev-parse --show-prefix 2> /dev/null)
     if [ -n "${git_prefix}" ]; then
         # dirs
@@ -91,7 +106,60 @@ show_git_pwd() {
     else
         # git did not work. show a regular path
         printf "${nongit_attrs}${PWD}"
-    fi    
+    fi
+}
+
+parse_git_pwd() {
+    # sets the folloving env vars:
+    # PWD_NONGIT: part of PWD before git tree;
+    # PWD_GIT_TREE: part of path belonging to a git work tree (or empty);
+    # PWD_GIT_BRANCH: name of current branch (or empty);
+    # PWD_GIT_CLEAN: is set, the tree is clean;
+    # prints nothing.
+    local git_base=$(git rev-parse --show-toplevel 2> /dev/null)
+    if [ -n "${git_base}" ]; then
+        # dirs
+        PWD_NONGIT=$(dirname "$git_base")"/"
+        PWD_GIT_TREE=${PWD#${PWD_NONGIT}}
+        # branch + status
+        PWD_GIT_BRANCH=$(git describe --contains --all HEAD)
+        git diff --no-ext-diff --quiet --exit-code \
+            && PWD_GIT_CLEAN='' || PWD_GIT_CLEAN='*'
+    else
+        # git did not work. show a regular path
+        PWD_NONGIT=${PWD}
+        PWD_GIT_TREE=''
+        PWD_GIT_BRANCH=''
+        PWD_GIT_CLEAN=''
+    fi
+    PWD_NONGIT=$(cut_path_to_home "${PWD_NONGIT}");
+}
+
+format_git_pwd() {
+    printf "$(pcolor none)"
+    printf '$(parse_git_pwd;'
+    printf 'printf "'
+    printf "$(pcolor cyan)"'${PWD_NONGIT}'
+    printf "$(pcolor bold gray)"'${PWD_GIT_TREE}'
+    printf "$(pcolor brown)"'${PWD_GIT_BRANCH:+" @ ${PWD_GIT_BRANCH}"}'
+    printf '${PWD_GIT_CLEAN:+" *"}'
+    printf '"'
+    printf ')' # of parse_git_pwd
+    printf "$(pcolor none) \$ "
+}
+
+make_prompt() {
+    printf "$(pcolor none)"
+    printf "$(p_exitcode)"
+    printf "$(p_time)"
+    printf '$('
+    # invoke desired  parse_nnn function to set vars
+    printf 'parse_git_pwd;'
+    #
+    printf 'printf '
+    # invoke all related format_nnn functions to write things
+    printf "$(format_git_pwd)"
+    printf ")$(pcolor none)\n$ "
 }
 
 prompt_colors()
@@ -117,7 +185,7 @@ if [ $(tput colors) -ge 8 ]; then
    else
        C_TITLE='\[\e]0;\u@\H:\w |'${git_branch_cmd}'\a\]'
    fi
-   if [ $TERM == 'linux' ] || [ $TERM == 'cons25' ]; then 
+   if [ $TERM == 'linux' ] || [ $TERM == 'cons25' ]; then
        # consoles don't support title
        C_TITLE=""
    fi
@@ -136,7 +204,7 @@ host_part=$(hostname | head -c 7)
 time_part='$(date +"%H:%M")'
 prompt_colors
 
-# example: 
+# example:
 PS1="$(pcolor none)$(p_exitcode)$(p_time) $(p_host):$(p_pwd_git) $(pcolor none)\n\$ "
 
 unset host_part time_part
