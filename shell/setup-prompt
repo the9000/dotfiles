@@ -111,40 +111,52 @@ show_git_pwd() {
 
 parse_git_pwd() {
     # sets the folloving env vars:
-    # PWD_NONGIT: part of PWD before git tree;
-    # PWD_GIT_TREE: part of path belonging to a git work tree (or empty);
-    # PWD_GIT_BRANCH: name of current branch (or empty);
-    # PWD_GIT_CLEAN: is set, the tree is clean;
+    # PWD_BASE: part of PWD before git tree;
+    # PWD_VCS_TREE: part of path belonging to a git work tree (or empty);
+    # PWD_VCS_BRANCH: name of current branch (or empty);
+    # PWD_VCS_CLEAN: is set, the tree is clean;
     # prints nothing.
     local git_base=$(git rev-parse --show-toplevel 2> /dev/null)
     if [ -n "${git_base}" ]; then
         # dirs
-        PWD_NONGIT=$(dirname "$git_base")"/"
-        PWD_GIT_TREE=${PWD#${PWD_NONGIT}}
+        PWD_BASE=$(dirname "$git_base")"/"
+        PWD_VCS_TREE=${PWD#${PWD_BASE}}
         # branch + status
-        PWD_GIT_BRANCH=$(git describe --contains --all HEAD)
+        PWD_VCS_BRANCH=$(git describe --contains --all --always HEAD)
         git diff --no-ext-diff --quiet --exit-code \
-            && PWD_GIT_CLEAN='' || PWD_GIT_CLEAN='*'
+            && PWD_VCS_CLEAN='' || PWD_VCS_CLEAN='*'
     else
         # git did not work. show a regular path
-        PWD_NONGIT=${PWD}
-        PWD_GIT_TREE=''
-        PWD_GIT_BRANCH=''
-        PWD_GIT_CLEAN=''
+        PWD_BASE=${PWD}
+        PWD_VCS_TREE=''
+        PWD_VCS_BRANCH=''
+        PWD_VCS_CLEAN=''
     fi
-    PWD_NONGIT=$(cut_path_to_home "${PWD_NONGIT}");
+    PWD_BASE=$(cut_path_to_home "${PWD_BASE}");
+}
+
+if_empty_else() {
+    [ -z "$1" ] && printf "$2" || printf "$3"
 }
 
 format_git_pwd() {
+    local clean_vcs_attrs="$(pcolor lt_green on green)"
+    local dirty_vcs_attrs="$(pcolor yellow on brown)"
+    # clean attributes
     printf "$(pcolor none)"
-    printf '$(parse_git_pwd;'
+    # do all calculating calls, filling vars
+    printf '$('
+    printf 'parse_git_pwd;' # could have parse_hg_pwd here, etc
+    # do any conditional processing here, put to more vars
+    printf 'VCS_BRANCH_ATTRS=$(if_empty_else "${PWD_VCS_CLEAN}" '"${clean_vcs_attrs} ${dirty_vcs_attrs}"');'
+    printf 'VCS_BRANCH_TXT=$(if_empty_else "${PWD_VCS_BRANCH}" "" "${VCS_BRANCH_ATTRS} @ ${PWD_VCS_BRANCH}");'
     printf 'printf "'
-    printf "$(pcolor cyan)"'${PWD_NONGIT}'
-    printf "$(pcolor bold gray)"'${PWD_GIT_TREE}'
-    printf "$(pcolor brown)"'${PWD_GIT_BRANCH:+" @ ${PWD_GIT_BRANCH}"}'
-    printf '${PWD_GIT_CLEAN:+" *"}'
+    printf "$(pcolor cyan)"'${PWD_BASE}'
+    printf "$(pcolor bold gray)"'${PWD_VCS_TREE}'
+#    printf "$(pcolor brown)"'${PWD_VCS_BRANCH:+" @ ${PWD_VCS_BRANCH}"}'
+    printf '${VCS_BRANCH_TXT}'
     printf '"'
-    printf ')' # of parse_git_pwd
+    printf ')' # of big enclosing printf
     printf "$(pcolor none) \$ "
 }
 
