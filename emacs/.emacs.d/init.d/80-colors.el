@@ -12,6 +12,4 @@
 (set-face-background 'hl-line "gray24") ;; current line
 (set-face-background 'fringe "gray16")
 
-(set-cursor-color "green")
-
 ;; The rest of coloring is done via customize and lives in .emacs

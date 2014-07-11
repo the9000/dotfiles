@@ -1,7 +1,7 @@
 ;; Editing settings
 
 ; default font
-(set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-90-*-*-m-0-iso10646-1")
+(set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-80-*-*-m-0-iso10646-1")
 
 ; use only spaces and no tabs
 (setq-default indent-tabs-mode nil)
@@ -18,10 +18,15 @@
                 (abbreviate-file-name (buffer-file-name))
                   "%* %b"))))
 
+;; cursor color
+(set-cursor-color "#0f0")
+
+;; Toolbar
+(tool-bar-mode 0)
+
 ;; make buffer names short and unique
 (require 'uniquify)
 (setq
  uniquify-buffer-name-style 'post-forward
  uniquify-separator ":")
 
-(tool-bar-mode 0)
