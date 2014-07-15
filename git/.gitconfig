@@ -1,16 +1,11 @@
-[user]
-	name = Dmitry Cheryasv
-	email = dmitry.cheryasov@gmail.com
+[include]
+    path = .gitconfig.google
 [color]
     filemode = false
     diff = auto
     status = auto
     branch = auto
     pager = true
-[color "status"]
-    added = green bold
-    changed = cyan bold
-    untracked = yellow dim
 [alias]
     b = branch
     ci = commit -v
@@ -25,9 +20,27 @@
     squ = !sh -c 'git commit -a -m \"squash! $(git log -1 --format='%s' $@)\"' -
     ri = rebase --interactive
     rc = rebase --continue
+    push-review = push origin HEAD:refs/for/master
     last = log -p -n 1
+    lst = log -p -n 1 --name-only
+    last5 = log -p -n 5
     unadd = reset
+    unstage = rm --cached
+    pull-rebase = pull --rebase origin master
 [core]
     pager = less -FRSX
-    #excludes = ~/.gitexcludes
+    excludesfile = ~/.gitexcludes
+    editor = femacs
+[gui]
+	recentrepo = /home/dcheryasov/work/monitoring
 
+[color "branch"]
+    current = green bold
+    remote = yellow
+
+[color "status"]
+    added = green bold
+    changed = green
+    untracked = yellow dim
+[push]
+    default = simple

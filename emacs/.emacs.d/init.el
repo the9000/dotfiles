@@ -24,3 +24,6 @@
   )
 )
 (load-init-dir-files (concat user-init-dir "/init.d"))
+
+; we want remote accessibility
+(server-start)
