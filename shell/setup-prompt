@@ -20,13 +20,14 @@ p_exitcode() {
     local nonzattr="$(pcolor $fg on $nonzero_bg)"
     local nextattr="$(pcolor $next_bg)"
     local nextbgattr="$(pcolor on $next_bg)"
-    echo -n '$(N=$?;[ $N -ne 0 ] && echo -n "'${nonzattr}'$N ")'
+    printf '$(N=$?;[ $N -ne 0 ] && printf "'${nonzattr}'$N ")'
 }
 
 p_time() {
     local bg='green'
     local fg='black' # optional foreground color
-    echo "$(pcolor $fg on $bg)"'$(date +%H:%M)'
+    # NOTE: printf would take more escaping here
+    echo -n  "$(pcolor $fg on $bg)"'$(date +%H:%M)'
 }
 
 p_host() {
@@ -109,6 +110,25 @@ show_git_pwd() {
     fi
 }
 
+show_git_pwd_2() {
+    # Nicely prints things based on PWD_VCS_nnn:
+    local nongit_attrs=$1
+    shift
+    local git_attrs=$1
+    shift
+    local clean_branch_attrs=${1:-${nongit_attrs}}
+    shift
+    local modified_branch_attrs=${1:-${git_attrs}}
+    #
+    if [ -n "${PWD_VCS_TREE}" ]; then
+        printf "${nongit_attrs}${PWD_BASE}${git_attrs}${PWD_VCS_TREE}"
+        printf "${branch_attrs} @ ${PWD_VCS_BRANCH}"
+    else
+        # git did not work. show a regular path
+        printf "${nongit_attrs}${PWD}"
+    fi
+}
+
 parse_git_pwd() {
     # sets the folloving env vars:
     # PWD_BASE: part of PWD before git tree;
@@ -135,43 +155,49 @@ parse_git_pwd() {
     PWD_BASE=$(cut_path_to_home "${PWD_BASE}");
 }
 
-if_empty_else() {
-    [ -z "$1" ] && printf "$2" || printf "$3"
+
+make_prompt_2() {
+    PS1="\
+$(pcolor none)\
+$(p_exitcode)\
+$(p_time) \
+$(p_host):\
+$(parse_git_pwd; show_git_pwd_2) \
+$(pcolor none)\n\$ \
+"    
+}
+
+if_set_else() {
+    [ -n "$1" ] && printf "$2" || printf "$3"
 }
 
 format_git_pwd() {
+    # All 'parse' was already called
     local clean_vcs_attrs="$(pcolor lt_green on green)"
     local dirty_vcs_attrs="$(pcolor yellow on brown)"
-    # clean attributes
-    printf "$(pcolor none)"
-    # do all calculating calls, filling vars
-    printf '$('
-    printf 'parse_git_pwd;' # could have parse_hg_pwd here, etc
     # do any conditional processing here, put to more vars
-    printf 'VCS_BRANCH_ATTRS=$(if_empty_else "${PWD_VCS_CLEAN}" '"${clean_vcs_attrs} ${dirty_vcs_attrs}"');'
-    printf 'VCS_BRANCH_TXT=$(if_empty_else "${PWD_VCS_BRANCH}" "" "${VCS_BRANCH_ATTRS} @ ${PWD_VCS_BRANCH}");'
+    printf 'VCS_BRANCH_ATTRS=$(if_set_else "${PWD_VCS_CLEAN}" '"${dirty_vcs_attrs} ${clean_vcs_attrs}"');'
+    printf 'VCS_BRANCH_TXT=$(if_set_else "${PWD_VCS_BRANCH}" "${VCS_BRANCH_ATTRS} @ ${PWD_VCS_BRANCH}");'
     printf 'printf "'
     printf "$(pcolor cyan)"'${PWD_BASE}'
     printf "$(pcolor bold gray)"'${PWD_VCS_TREE}'
-#    printf "$(pcolor brown)"'${PWD_VCS_BRANCH:+" @ ${PWD_VCS_BRANCH}"}'
     printf '${VCS_BRANCH_TXT}'
     printf '"'
     printf ')' # of big enclosing printf
-    printf "$(pcolor none) \$ "
 }
 
 make_prompt() {
     printf "$(pcolor none)"
     printf "$(p_exitcode)"
-    printf "$(p_time)"
+    printf '$(p_time)'
     printf '$('
     # invoke desired  parse_nnn function to set vars
     printf 'parse_git_pwd;'
     #
-    printf 'printf '
     # invoke all related format_nnn functions to write things
     printf "$(format_git_pwd)"
-    printf ")$(pcolor none)\n$ "
+    printf ")"
+    printf "$(pcolor none)\n$ "
 }
 
 prompt_colors()
