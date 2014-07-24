@@ -7,10 +7,6 @@
     status = auto
     branch = auto
     pager = true
-[color "status"]
-    added = green bold
-    changed = cyan bold
-    untracked = yellow dim
 [alias]
     b = branch
     ci = commit -v
@@ -26,8 +22,21 @@
     ri = rebase --interactive
     rc = rebase --continue
     last = log -p -n 1
+    lst = log -p -n 1 --name-only
+    last5 = log -p -n 5
     unadd = reset
+    unstage = rm --cached
 [core]
     pager = less -FRSX
-    #excludes = ~/.gitexcludes
+    excludesfile = ~/.gitexcludes
 
+[color "branch"]
+    current = green bold
+    remote = yellow
+
+[color "status"]
+    added = green bold
+    changed = cyan bold
+    untracked = yellow dim
+[push]
+    default = simple
