@@ -40,7 +40,7 @@
 
 [color "status"]
     added = green bold
-    changed = green
+    changed = cyan bold
     untracked = yellow dim
 [push]
     default = simple
