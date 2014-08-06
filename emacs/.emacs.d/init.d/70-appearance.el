@@ -10,6 +10,9 @@
 ; we want line numbers everywhere
 (global-linum-mode t)
 
+; column numbes everywhere
+(column-number-mode t)
+
 (setq show-trailing-whitespace t) ;; highlight it everywhere
 
 ;; set frame title to filename
@@ -17,9 +20,6 @@
   '("" invocation-name ": "(:eval (if (buffer-file-name)
                 (abbreviate-file-name (buffer-file-name))
                   "%* %b"))))
-
-;; cursor color
-(set-cursor-color "#0f0")
 
 ;; Toolbar
 (tool-bar-mode 0)

@@ -17,7 +17,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(comint-highlight-prompt ((t (:foreground "green1"))))
- '(cursor ((t (:background "black" :foreground "coral"))))
+ '(cursor ((t (:background "#fc0"))))
  '(flymake-infoline ((((class color) (background dark)) (:background "DarkRed"))))
  '(font-lock-comment-face ((t (:foreground "IndianRed1"))))
  '(font-lock-doc-face ((t (:foreground "pink2"))))
@@ -37,3 +37,9 @@
  '(outline-3 ((t (:foreground "khaki"))))
  '(outline-4 ((t (:foreground "burlywood"))))
  '(sh-quoted-exec ((((class color) (background dark)) (:foreground "DarkOliveGreen1" :weight bold)))))
+
+
+;; Note: work around a bug that breaks cursor color setting via customize. 
+;; cursor color for all new frames;
+;; plain set-cursor-color is ineffective.
+(add-to-list 'default-frame-alist '(cursor-color . "#0f0"))
