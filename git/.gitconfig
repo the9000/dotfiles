@@ -27,6 +27,8 @@
     unadd = reset
     unstage = rm --cached
     pull-rebase = pull --rebase origin master
+    cp = cherry-pick
+    cpx = cherry-pick -x
 [core]
     pager = less -FRSX
     excludesfile = ~/.gitexcludes
