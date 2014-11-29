@@ -1,4 +1,4 @@
-# bin/
+# [bin/](bin)
 * `E` and `EE` help open files in emcas clients from command line.
 * `N2` shows a huge status banner when a long-running process completes.
 * `ghci.sh` tries to autodetect the presence of cabal sandbox and use it when
