@@ -10,13 +10,13 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(fic-highlighted-words (quote ("FIXME" "TODO" "BUG" "REDFLAG" "XXX")))
- '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
- '(package-archives (quote (("marmalade" . "https://marmalade-repo.org/packages/") ("gnu" . "https://elpa.gnu.org/packages/")))))
+ '(haskell-mode-hook (quote (turn-on-haskell-indentation))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "grey20" :foreground "gainsboro" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 83 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
  '(comint-highlight-prompt ((t (:foreground "green1"))))
  '(cursor ((t (:background "#fc0"))))
  '(flymake-infoline ((((class color) (background dark)) (:background "DarkRed"))))
@@ -29,10 +29,13 @@
  '(font-lock-string-face ((t (:foreground "LimeGreen" :weight bold))))
  '(font-lock-type-face ((t (:foreground "cyan2" :weight bold))))
  '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod"))))
- '(highlight-indent-face ((t (:background "gray34"))))
+ '(highlight-indent-face ((t (:background "gray16"))))
+ '(hl-line ((t (:inherit highlight :background "gray16"))))
+ '(ido-first-match ((t (:foreground "salmon" :weight bold))))
  '(ido-only-match ((((class color)) (:foreground "SpringGreen"))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "orange"))))
  '(linum ((t (:inherit (shadow default) :background "gray20" :foreground "yellow4"))))
+ '(org-level-1 ((t (:foreground "gray75" :underline t :height 1.5))))
  '(outline-1 ((t (:foreground "Cyan2"))))
  '(outline-2 ((t (:foreground "pale green"))))
  '(outline-3 ((t (:foreground "khaki"))))
