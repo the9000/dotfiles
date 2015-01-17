@@ -35,6 +35,8 @@ make_sandbox_path() {
 if [ -d "${SANDBOX_LOC}" ]; then
     SANDBOX_PATH=$(make_sandbox_path uname)
     if [ -d "${SANDBOX_PATH}" ]; then
+        # update PATH to use local bin/
+        export PATH="${SANDBOX_LOC}/bin":$PATH
         # start the command
         "$CMD" -no-user-package-db -package-db "${SANDBOX_PATH}" $*
     else
