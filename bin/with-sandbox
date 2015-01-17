@@ -1,0 +1,50 @@
+#!/bin/bash
+set -e
+
+# NOTE: don't quote the tilde or it won't be expanded!
+ENV_BASE=${SANDBOX_BASE:-~/personal/projects/.environments}
+
+if [ "$1" = "-h" ] || [ "$1" = "--help" ] || [ -z "$1" ]; then
+    echo "Usage: $(basename $0) <sandbox-name> <cmd> ..."
+    echo "<sandbox-name> is a directory with a cabal sandbox;"\
+         "either absolute or relative to the value of"\
+         "\${SANDBOX_BASE}, which defaults to ${ENV_BASE}."
+    echo "<cmd> is ghci, ghc, etc; it gets passed -package-db"\
+         "from the sandbox."
+    echo "The rest is passed as arguments to <cmd>."
+    [ -z "$1" ] && exit 2 || exit 0
+fi
+
+DOT_DIR=".cabal-sandbox"
+
+# pop the parameters
+SANDBOX_NAME="$1"
+shift
+CMD="$1"
+shift
+SANDBOX_LOC="${ENV_BASE}/${SANDBOX_NAME}/${DOT_DIR}"
+
+make_sandbox_path() {
+    OS=$(uname -s | tr '[:upper:]' '[:lower:]')  # e.g. 'linux'
+    ARCH=$(uname -p) # e.g. 'x86_64'
+    GHC_VERSION=$(ghc --version | sed 's/.*\([0-9]\.[0-9]\.[0-9]\)$/\1/')
+    echo -n "${SANDBOX_LOC}/${ARCH}-${OS}-ghc-${GHC_VERSION}-packages.conf.d/"
+}
+
+# main
+if [ -d "${SANDBOX_LOC}" ]; then
+    SANDBOX_PATH=$(make_sandbox_path uname)
+    if [ -d "${SANDBOX_PATH}" ]; then
+        # start the command
+        "$CMD" -no-user-package-db -package-db "${SANDBOX_PATH}" $*
+    else
+        echo "Sandbox seems to exist, but architecture and OS don't match."
+        exit 1
+    fi
+else
+    echo "Sandbox ${SANDBOX_NAME} not found!"
+    exit 1
+fi
+
+
+
