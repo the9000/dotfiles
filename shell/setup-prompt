@@ -1,7 +1,206 @@
-# should be sourced by shell
-
+# should be sourced by bash
 # prompt tweaks
-function prompt_colors
+
+source colors.sh
+
+# TODO: do everything within one function that prints PS1, to keep namespace clean.
+
+pcolor() {
+    # Same as color(), but adds \[ and \] to make the color setting prompt-transparent.
+    # Without arguments, prints nothing at all.
+    [ -n "$1" ] && echo -n '\['$(color $*)'\]'
+}
+
+p_exitcode() {
+    # dynamically sets background color depending on $?
+    local nonzero_bg='red'
+    local fg=$(hl_color 'white' 'gray') # optional foreground color
+    #
+    # ? local zattr="$(pcolor $fg on $zero_bg)"
+    local nonzattr="$(pcolor $fg on $nonzero_bg)"
+    local nextattr="$(pcolor $next_bg)"
+    local nextbgattr="$(pcolor on $next_bg)"
+    printf '$(N=$?;[ $N -ne 0 ] && printf "'${nonzattr}'$N ")'
+}
+
+p_time() {
+    local bg='green'
+    local fg='black' # optional foreground color
+    # NOTE: printf would take more escaping here
+    echo -n  "$(pcolor $fg on $bg)"'$(date +%H:%M)'
+}
+
+p_host() {
+    local normal_fg='gray'       # default host name color
+    local special_fg=$(hl_color 148 'cyan')
+    local bg=$(hl_color 22 'blue') # background
+    #
+    local fg
+    local underline=''
+    local underline_off_code=''
+    host_part=$(hostname)
+    if [[ ${host_part} =~ corp\.google\.com ]]; then
+        fg=${special_fg}
+    else
+        fg=${normal_fg}
+    fi
+    if [ -n "$SSH_CLIENT" ]; then
+        underline='underline'
+        underline_off_code="$(pcolor no_underline)"
+    fi
+    printf "$(pcolor $fg on $bg $underline) ${host_part}${underline_off_code}"
+}
+
+p_pwd_git() {
+    # Lets show current directory.
+    # If under git, shows repo's base dir, current branch, and commit status
+    local bg=$(hl_color 22 blue)
+    local plain_fg=$(hl_color 82 cyan)
+    local repo_fg="bold $(hl_color 253 gray)"
+    local clean_fg="none $(hl_color lt_green black) on $(hl_color 22 green)"
+    local modified_fg="none $(hl_color 220 black) on $(hl_color 58 brown)"
+    # more to come
+    local plain_attrs="$(pcolor ${plain_fg} on ${bg})"
+    local git_tree_attrs="$(pcolor ${repo_fg})"
+    printf '$(show_git_pwd "'${plain_attrs}'" "'${git_tree_attrs}'" "'
+    printf $(pcolor ${clean_fg})'" "'$(pcolor ${modified_fg})'")'
+}
+
+cut_path_to_home() {
+    local path=${1:-$PWD}
+    local cut_path=${path#${HOME}}
+    if [ "${cut_path}" != "${path}" ]; then
+        printf '~'"${cut_path}"
+    else
+        printf "${path}"
+    fi
+}
+
+show_git_pwd() {
+    # sets the folloving env vars:
+    # PWD_NONGIT: part of PWD before git tree
+    # PWD_GIT_TREE: part of path belonging to a git work tree (or empty)
+    # PWD_GIT_BRANCH: name of current branch (or empty)
+    # PWD_GIT_CLEAN: is set, the tree is clean
+    local nongit_attrs=$1
+    shift
+    local git_attrs=$1
+    shift
+    local clean_branch_attrs=${1:-${nongit_attrs}}
+    shift
+    local modified_branch_attrs=${1:-${git_attrs}}
+    #
+    local git_prefix=$(git rev-parse --show-prefix 2> /dev/null)
+    if [ -n "${git_prefix}" ]; then
+        # dirs
+        local pwd_slash="${PWD}/"
+        local git_base=${pwd_slash%${git_prefix}}
+        local non_git_prefix=$(dirname "$git_base")"/"
+        local worktree_path=${PWD#${non_git_prefix}}
+        # branch + status
+        local branch=$(git describe --contains --all HEAD)
+        local branch_attrs=$(git diff --no-ext-diff --quiet --exit-code \
+            && printf "${clean_branch_attrs}" || printf "${modified_branch_attrs}")
+        # final output
+        printf "${nongit_attrs}${non_git_prefix}${git_attrs}${worktree_path}"
+        printf "${branch_attrs} @ ${branch}"
+    else
+        # git did not work. show a regular path
+        printf "${nongit_attrs}${PWD}"
+    fi
+}
+
+show_git_pwd_2() {
+    # Nicely prints things based on PWD_VCS_nnn:
+    local nongit_attrs=$1
+    shift
+    local git_attrs=$1
+    shift
+    local clean_branch_attrs=${1:-${nongit_attrs}}
+    shift
+    local modified_branch_attrs=${1:-${git_attrs}}
+    #
+    if [ -n "${PWD_VCS_TREE}" ]; then
+        printf "${nongit_attrs}${PWD_BASE}${git_attrs}${PWD_VCS_TREE}"
+        printf "${branch_attrs} @ ${PWD_VCS_BRANCH}"
+    else
+        # git did not work. show a regular path
+        printf "${nongit_attrs}${PWD}"
+    fi
+}
+
+parse_git_pwd() {
+    # sets the folloving env vars:
+    # PWD_BASE: part of PWD before git tree;
+    # PWD_VCS_TREE: part of path belonging to a git work tree (or empty);
+    # PWD_VCS_BRANCH: name of current branch (or empty);
+    # PWD_VCS_CLEAN: is set, the tree is clean;
+    # prints nothing.
+    local git_base=$(git rev-parse --show-toplevel 2> /dev/null)
+    if [ -n "${git_base}" ]; then
+        # dirs
+        PWD_BASE=$(dirname "$git_base")"/"
+        PWD_VCS_TREE=${PWD#${PWD_BASE}}
+        # branch + status
+        PWD_VCS_BRANCH=$(git describe --contains --all --always HEAD)
+        git diff --no-ext-diff --quiet --exit-code \
+            && PWD_VCS_CLEAN='' || PWD_VCS_CLEAN='*'
+    else
+        # git did not work. show a regular path
+        PWD_BASE=${PWD}
+        PWD_VCS_TREE=''
+        PWD_VCS_BRANCH=''
+        PWD_VCS_CLEAN=''
+    fi
+    PWD_BASE=$(cut_path_to_home "${PWD_BASE}");
+}
+
+
+make_prompt_2() {
+    PS1="\
+$(pcolor none)\
+$(p_exitcode)\
+$(p_time) \
+$(p_host):\
+$(parse_git_pwd; show_git_pwd_2) \
+$(pcolor none)\n\$ \
+"    
+}
+
+if_set_else() {
+    [ -n "$1" ] && printf "$2" || printf "$3"
+}
+
+format_git_pwd() {
+    # All 'parse' was already called
+    local clean_vcs_attrs="$(pcolor lt_green on green)"
+    local dirty_vcs_attrs="$(pcolor yellow on brown)"
+    # do any conditional processing here, put to more vars
+    printf 'VCS_BRANCH_ATTRS=$(if_set_else "${PWD_VCS_CLEAN}" '"${dirty_vcs_attrs} ${clean_vcs_attrs}"');'
+    printf 'VCS_BRANCH_TXT=$(if_set_else "${PWD_VCS_BRANCH}" "${VCS_BRANCH_ATTRS} @ ${PWD_VCS_BRANCH}");'
+    printf 'printf "'
+    printf "$(pcolor cyan)"'${PWD_BASE}'
+    printf "$(pcolor bold gray)"'${PWD_VCS_TREE}'
+    printf '${VCS_BRANCH_TXT}'
+    printf '"'
+    printf ')' # of big enclosing printf
+}
+
+make_prompt() {
+    printf "$(pcolor none)"
+    printf "$(p_exitcode)"
+    printf '$(p_time)'
+    printf '$('
+    # invoke desired  parse_nnn function to set vars
+    printf 'parse_git_pwd;'
+    #
+    # invoke all related format_nnn functions to write things
+    printf "$(format_git_pwd)"
+    printf ")"
+    printf "$(pcolor none)\n$ "
+}
+
+prompt_colors()
 # sets C_ACCESS, C_SUPER, C_TITLE, C_NOCOLOR to esc sequences if xterm
 # else sets them to empty values
 {
@@ -24,7 +223,7 @@ if [ $(tput colors) -ge 8 ]; then
    else
        C_TITLE='\[\e]0;\u@\H:\w |'${git_branch_cmd}'\a\]'
    fi
-   if [ $TERM == 'linux' ] || [ $TERM == 'cons25' ]; then 
+   if [ $TERM == 'linux' ] || [ $TERM == 'cons25' ]; then
        # consoles don't support title
        C_TITLE=""
    fi
@@ -42,7 +241,9 @@ fi
 host_part=$(hostname | head -c 7)
 time_part='$(date +"%H:%M")'
 prompt_colors
-PS1="${C_ACCESS}${host_part} ${time_part} ${C_USER}\\$ ${C_NOCOLOR}${C_TITLE}"
+
+# example:
+PS1="$(pcolor none)$(p_exitcode)$(p_time) $(p_host):$(p_pwd_git) $(pcolor none)\n\$ "
 
 unset host_part time_part
 
