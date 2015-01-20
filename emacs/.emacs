@@ -1,6 +1,9 @@
 ; load the modularized settings
 (load-file "~/.emacs.d/init.el")
 
+; default font
+(set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-90-*-*-m-0-iso10646-1")
+
 ;; Anything after this point is set via customize commands.
 ;; Not to be edited by hand.
 
@@ -43,7 +46,7 @@
  '(sh-quoted-exec ((((class color) (background dark)) (:foreground "DarkOliveGreen1" :weight bold)))))
 
 
-;; Note: work around a bug that breaks cursor color setting via customize. 
+;; Note: work around a bug that breaks cursor color setting via customize.
 ;; cursor color for all new frames;
 ;; plain set-cursor-color is ineffective.
 (add-to-list 'default-frame-alist '(cursor-color . "#0f0"))
