@@ -1,2 +1,4 @@
 #!/bin/bash
-aosd_cat -p 2 -y 50 -x -100 --fore-color '#f36' --shadow-color '#ee3' -n "DejaVu Sans Bold Condensed 64"
+aosd_cat -p 4 -y 50 -x -100 -f 0 -o 0 \
+  --fore-color '#f36' --shadow-color '#ee3' \
+  -n "DejaVu Sans Bold Condensed 64"

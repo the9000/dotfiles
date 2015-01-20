@@ -1,11 +1,14 @@
-[include]
-    path = .gitconfig.google
+[user]
+	name = Dmitry Cheryasov
+    email = dcheryasov@google.com
 [color]
     filemode = false
     diff = auto
     status = auto
     branch = auto
     pager = true
+[color "diff"]
+    whitespace = red reverse
 [alias]
     b = branch
     ci = commit -v
@@ -27,12 +30,17 @@
     unadd = reset
     unstage = rm --cached
     pull-rebase = pull --rebase origin master
+    pwd = rev-parse --show-toplevel
     cp = cherry-pick
     cpx = cherry-pick -x
+    shon = show --oneline --name-only
 [core]
     pager = less -FRSX
-    excludesfile = ~/.gitexcludes
+	excludesfile = /usr/local/google/home/dcheryasov/.gitignores
     editor = femacs
+[gui]
+	recentrepo = /home/dcheryasov/work/monitoring
+	editor = E
 
 [color "branch"]
     current = green bold
@@ -40,7 +48,14 @@
 
 [color "status"]
     added = green bold
-    changed = cyan bold
+    changed = cyan bold 
     untracked = yellow dim
+    
 [push]
-    default = simple
+	default = simple
+[diff]
+	tool = meld
+[merge]
+	tool = meld
+[cola]
+	fontdiff = DejaVu Sans Mono,8,-1,5,50,0,0,0,0,0
