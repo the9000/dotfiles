@@ -20,6 +20,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "grey20" :foreground "gainsboro" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 83 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
+ '(comint-highlight-input ((t (:foreground "sandy brown" :weight bold))))
  '(comint-highlight-prompt ((t (:foreground "green1"))))
  '(cursor ((t (:background "#fc0"))))
  '(flymake-infoline ((((class color) (background dark)) (:background "DarkRed"))))
