@@ -98,7 +98,7 @@ show_git_pwd() {
         local non_git_prefix=$(dirname "$git_base")"/"
         local worktree_path=${PWD#${non_git_prefix}}
         # branch + status
-        local branch=$(git describe --contains --all HEAD)
+        local branch=$(git symbolic-ref --short HEAD)
         local branch_attrs=$(git diff --no-ext-diff --quiet --exit-code \
             && printf "${clean_branch_attrs}" || printf "${modified_branch_attrs}")
         # final output
