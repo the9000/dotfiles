@@ -33,8 +33,6 @@
     pager = less -FRSX
     excludesfile = ~/.gitexcludes
     editor = femacs
-[gui]
-	recentrepo = /home/dcheryasov/work/monitoring
 
 [color "branch"]
     current = green bold
