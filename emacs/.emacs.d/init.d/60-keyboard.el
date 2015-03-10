@@ -26,3 +26,6 @@
 
 ; M-click opens file at mouse
 (global-set-key (kbd "<M-down-mouse-1>") 'ffap-at-mouse)
+
+; XXX move to a separate file?
+(delete-selection-mode 1)
