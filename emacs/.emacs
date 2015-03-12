@@ -2,7 +2,7 @@
 (load-file "~/.emacs.d/init.el")
 
 ; default font
-(set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-90-*-*-m-0-iso10646-1")
+;; (set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-90-*-*-m-0-iso10646-1")
 
 ;; Anything after this point is set via customize commands.
 ;; Not to be edited by hand.
@@ -15,13 +15,13 @@
  '(fic-highlighted-words (quote ("FIXME" "TODO" "REDFLAG" "XXX" "NOTE")))
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
  '(package-archives (quote (("marmalade" . "https://marmalade-repo.org/packages/") ("melpa" . "http://melpa.milkbox.net/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
- '(py-indent-offset 2))
+ '(py-indent-offset 2 t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "grey24" :foreground "gainsboro" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 84 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
+ '(default ((t (:background "grey24" :foreground "gainsboro"))))
  '(comint-highlight-input ((t (:foreground "sandy brown" :weight bold))))
  '(comint-highlight-prompt ((t (:foreground "green1"))))
  '(cursor ((t (:background "#fc0"))))
@@ -50,8 +50,9 @@
  '(web-mode-html-tag-face ((t (:inherit font-lock-function-name-face))))
  '(web-mode-variable-name-face ((t (:inherit font-lock-constant-face :weight bold)))))
 
-
 ;; Note: work around a bug that breaks cursor color setting via customize.
 ;; cursor color for all new frames;
 ;; plain set-cursor-color is ineffective.
 (add-to-list 'default-frame-alist '(cursor-color . "#0f0"))
+
+(message ".emacs done")

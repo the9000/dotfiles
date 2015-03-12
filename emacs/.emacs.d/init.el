@@ -25,5 +25,7 @@
 )
 (load-init-dir-files (concat user-init-dir "/init.d"))
 
-; we want remote accessibility
-(server-start)
+;; Do not add anything here.
+
+;; (message "init.el done")
+
