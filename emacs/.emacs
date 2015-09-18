@@ -21,7 +21,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:background "grey24" :foreground "gainsboro"))))
+ '(default ((t (:inherit nil :stipple nil :background "grey24" :foreground "gainsboro" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 80 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
+ '(column-enforce-face ((t (:background "DeepSkyBlue4"))))
  '(comint-highlight-input ((t (:foreground "sandy brown" :weight bold))))
  '(comint-highlight-prompt ((t (:foreground "green1"))))
  '(cursor ((t (:background "#fc0"))))
@@ -36,6 +37,8 @@
  '(font-lock-type-face ((t (:foreground "cyan2" :weight bold))))
  '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod"))))
  '(highlight-indent-face ((t (:background "gray23"))))
+ '(highlight-indentation-current-column-face ((t (:background "gray20"))))
+ '(highlight-indentation-face ((t (:background "gray22"))))
  '(hl-line ((t (:inherit highlight :background "gray16"))))
  '(ido-first-match ((t (:foreground "salmon" :weight bold))))
  '(ido-only-match ((((class color)) (:foreground "SpringGreen"))))
@@ -47,6 +50,7 @@
  '(outline-3 ((t (:foreground "khaki"))))
  '(outline-4 ((t (:foreground "burlywood"))))
  '(sh-quoted-exec ((((class color) (background dark)) (:foreground "DarkOliveGreen1" :weight bold))))
+ '(show-paren-match ((t (:background "sienna4"))))
  '(web-mode-html-tag-face ((t (:inherit font-lock-function-name-face))))
  '(web-mode-variable-name-face ((t (:inherit font-lock-constant-face :weight bold)))))
 
