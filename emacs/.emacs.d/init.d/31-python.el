@@ -22,4 +22,6 @@
   (outline-minor-mode t)
   ; initially hide all but the headers: (hide-body)
   (show-paren-mode 1)
+  ; mark excessively long lines if available
+  (if (fboundp 'column-enforce-mode) (column-enforce-mode))
 )

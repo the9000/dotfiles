@@ -2,11 +2,11 @@
 
 (global-set-key (kbd "C-z") 'undo)
 
-; terminal-lice copy-paste
+; terminal-like copy-paste
 (global-set-key (kbd "C-S-c C-S-c") 'clipboard-kill-ring-save)
 (global-set-key (kbd "C-S-v") 'x-clipboard-yank)
 
-; C-X PgUp / PgDn: windows
+; C-X Up / Dn: windows
 (global-set-key (kbd "C-X <up>") 'previous-multiframe-window)
 (global-set-key (kbd "C-X <down>") 'next-multiframe-window)
 
@@ -27,5 +27,18 @@
 ; M-click opens file at mouse
 (global-set-key (kbd "<M-down-mouse-1>") 'ffap-at-mouse)
 
-; XXX move to a separate file?
+; TODO: move to a separate file?
 (delete-selection-mode 1)
+
+; Outline mode keys rebound more nicely
+(defun my-outline-mode-key-bindings ()
+  "Usable whenever outline (minor) mode is invoked."
+  (interactive)
+  (local-set-key (kbd "C-c <up>") 'hide-entry)
+  (local-set-key (kbd "C-c <down>") 'show-entry)
+  (local-set-key (kbd "C-S-c <up>") 'hide-body)
+  (local-set-key (kbd "C-S-c <down>") 'show-all)
+)
+
+(add-hook 'outline-mode-hook 'my-outline-mode-key-bindings)
+(add-hook 'outline-minor-mode-hook 'my-outline-mode-key-bindings)

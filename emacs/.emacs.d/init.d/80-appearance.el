@@ -9,7 +9,9 @@
 (setq default-tab-width 4)
 
 ; we want line numbers everywhere
-(global-linum-mode t)
+(if (fboundp 'global-nlinum-mode)
+    (global-nlinum-mode t)
+    (global-linum-mode t))
 
 ; column numbes everywhere
 (column-number-mode t)
@@ -35,4 +37,3 @@
 (setq
  uniquify-buffer-name-style 'post-forward
  uniquify-separator ":")
-
