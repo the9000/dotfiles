@@ -24,7 +24,10 @@ fi
 [ -r ~/.setup-p4 ] && . ~/.setup-p4
 
 # do we have prodaccess?
-[ -x "$(which prodcertstatus)" ] && prodcertstatus
+# [ -x "$(which prodcertstatus)" ] && prodcertstatus
+
+# Enable SSH agent
+[ -r ~/.ssh-agent ] && . ~/.ssh-agent > ~/.ssh-agent-output
 
 # Can attach to TMUX if we're interactive and not yet in
 if [ -n ${SSH_TTY} ] && [ -z ${TMUX} ] && killall -q -0 tmux; then
