@@ -34,9 +34,13 @@ def setupReadlineAndHistory(history_path):
 
 
 def setupPrompt():
+  try:
+    getter = os.getenvb  # py3
+  except AttributeError:
+    getter = os.getenv  # py2
   # TODO: handle unicode in Py3 envs.
-  sys.ps1 = os.getenv('PYTHON_PS1', '>>> ').decode('string_escape')
-  sys.ps2 = os.getenv('PYTHON_PS2', '... ').decode('string_escape')
+  sys.ps1 = getter(b'PYTHON_PS1', b'>>> ').decode('unicode_escape')
+  sys.ps2 = getter(b'PYTHON_PS2', b'... ').decode('unicode_escape')
 
 # main
 setupReadlineAndHistory(os.path.expanduser("~/.pyhistory"))
