@@ -34,8 +34,8 @@
 (defun my-outline-mode-key-bindings ()
   "Usable whenever outline (minor) mode is invoked."
   (interactive)
-  (local-set-key (kbd "C-c <up>") 'hide-entry)
-  (local-set-key (kbd "C-c <down>") 'show-entry)
+  (local-set-key (kbd "C-c <up>") 'hide-subtree)
+  (local-set-key (kbd "C-c <down>") 'show-subtree)
   (local-set-key (kbd "C-S-c <up>") 'hide-body)
   (local-set-key (kbd "C-S-c <down>") 'show-all)
 )
