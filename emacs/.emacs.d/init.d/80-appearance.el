@@ -8,7 +8,9 @@
 (setq default-tab-width 4)
 
 ; we want line numbers everywhere
-(global-linum-mode t)
+(if (fboundp 'global-nlinum-mode)
+    (global-nlinum-mode t)
+    (global-linum-mode t))
 
 ; column numbes everywhere
 (column-number-mode t)
@@ -24,9 +26,13 @@
 ;; Toolbar
 (tool-bar-mode 0)
 
-;; make buffer names short and unique
+;; Editing affordances
+(electric-pair-mode t)
+;; (outline-mode t)
+(ido-mode t)
+
+;; Make buffer names short and unique
 (require 'uniquify)
 (setq
  uniquify-buffer-name-style 'post-forward
  uniquify-separator ":")
-
