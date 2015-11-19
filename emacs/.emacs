@@ -14,7 +14,7 @@
  ;; If there is more than one, they won't work right.
  '(fic-highlighted-words (quote ("FIXME" "TODO" "BUG" "REDFLAG" "XXX")))
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
- '(package-archives (quote (("marmalade" . "https://marmalade-repo.org/packages/") ("gnu" . "http://elpa.gnu.org/packages/") ("melpa" . "http://melpa.org/packages/")))))
+ '(package-archives (quote (("marmalade" . "https://marmalade-repo.org/packages/") ("gnu" . "http://elpa.gnu.org/packages/") ("melpa" . "http://melpa.org/packages/"))))
  '(py-indent-offset 2 t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
