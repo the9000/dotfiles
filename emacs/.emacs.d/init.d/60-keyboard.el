@@ -42,3 +42,6 @@
 
 (add-hook 'outline-mode-hook 'my-outline-mode-key-bindings)
 (add-hook 'outline-minor-mode-hook 'my-outline-mode-key-bindings)
+
+; Delete / yank overwrites regions
+(delete-selection-mode 1)
