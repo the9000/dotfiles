@@ -45,3 +45,6 @@
 
 ; Delete / yank overwrites regions
 (delete-selection-mode 1)
+
+; Always ask before exiting.
+(setq confirm-kill-emacs 'y-or-n-p)
