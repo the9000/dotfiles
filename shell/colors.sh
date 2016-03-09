@@ -2,24 +2,23 @@
 
 
 # name -> ANSI esc {3,4}Nm code
-# NOTE: space in bracket matters!
-declare -A color_by_name
-color_by_name[black]=0
-color_by_name[red]=1
-color_by_name[green]=2
-color_by_name[brown]=3
-color_by_name[blue]=4
-color_by_name[purple]=5
-color_by_name[cyan]=6
-color_by_name[gray]=7
-color_by_name[dk_gray]=8
-color_by_name[lt_red]=9
-color_by_name[lt_green]=10
-color_by_name[yellow]=11
-color_by_name[lt_blue]=12
-color_by_name[lt_purple]=13
-color_by_name[lt_cyan]=14
-color_by_name[white]=15
+# NOTE: arrray support sucks on OSX, switch to 16 pattern-named variables.
+color_by_name_black=0
+color_by_name_red=1
+color_by_name_green=2
+color_by_name_brown=3
+color_by_name_blue=4
+color_by_name_purple=5
+color_by_name_cyan=6
+color_by_name_gray=7
+color_by_name_dk_gray=8
+color_by_name_lt_red=9
+color_by_name_lt_green=10
+color_by_name_yellow=11
+color_by_name_lt_blue=12
+color_by_name_lt_purple=13
+color_by_name_lt_cyan=14
+color_by_name_white=15
 
 COLORS_MAX=$(tput colors)
 
@@ -68,7 +67,8 @@ color() {
             is_bg=1
         else
             local selector=$([ -z "$is_bg" ] && echo 'setaf' || echo 'setab')
-            local color=${color_by_name[$1]}
+            local color_var_name="color_by_name_$1"
+            local color=${!color_var_name}
             if [ -z "${color}" ]; then color=$1; fi # allow numeric colors
             result="${result}$(tput ${selector} ${color})"
             shift
