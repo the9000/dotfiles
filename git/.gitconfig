@@ -1,6 +1,6 @@
 [user]
 	name = Dmitry Cheryasov
-    email = dcheryasov@google.com
+    email = dcheryasov@handshake.com
 [color]
     filemode = false
     diff = auto
@@ -12,13 +12,13 @@
 [alias]
     b = branch
     ci = commit -v
-    co = checkout
+	co = checkout
     cob = checkout -b
     d = diff
     l = log
     lg = log --graph --pretty=format:'%C(green)%h%Creset -%C(bold blue)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset' --abbrev-commit --date=relative
     lga = log --graph --pretty=format:'%C(green)%h%Creset -%C(bold blue)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset' --abbrev-commit --date=relative --branches
-    st = status
+	st = status
     fixup = !sh -c 'git commit -a -m \"fixup! $(git log -1 --format='%s' $@)\"' -
     squ = !sh -c 'git commit -a -m \"squash! $(git log -1 --format='%s' $@)\"' -
     ri = rebase --interactive
@@ -34,9 +34,13 @@
     cp = cherry-pick
     cpx = cherry-pick -x
     shon = show --oneline --name-only
+	feap = fetch --all --prune
+	br = branch
+    feap = fetch --all --prune
+	jira-co = "!f() { b=$1; shift; { git branch && git branch -r ; } | awk -v rpat=^[^/]*/$b -v pat=^$b '$1 ~ pat || $1 ~ rpat { print ; exit ; }' | cut -d/ -f2 | xargs -I{} git co {} $@; }; f"
 [core]
     pager = less -FRSX
-	excludesfile = /usr/local/google/home/dcheryasov/.gitignores
+	excludesfile = ~/.gitignore
     editor = femacs
 [gui]
 	recentrepo = /home/dcheryasov/work/monitoring
@@ -55,10 +59,12 @@
     unmerged = magenta bold
     
 [push]
-	default = simple
+	default = current
 [diff]
 	tool = meld
 [merge]
 	tool = meld
 [cola]
-	fontdiff = DejaVu Sans Mono,8,-1,5,50,0,0,0,0,0
+	fontdiff = DejaVu Sans Mono,11,-1,5,50,0,0,0,0,0
+[branch]
+	autosetuprebase = always

@@ -12,34 +12,43 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ag-executable "/usr/local/bin/ag")
+ '(custom-safe-themes
+   (quote
+    ("3ddfde8b6afe9a72749b73b021ffd5a837f6b9d5c638f7c16d81ec9d346d899f" default)))
  '(fic-highlighted-words (quote ("FIXME" "TODO" "REDFLAG" "XXX" "NOTE")))
- '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
- '(package-archives (quote (("marmalade" . "https://marmalade-repo.org/packages/") ("melpa" . "http://melpa.milkbox.net/packages/") ("gnu" . "http://elpa.gnu.org/packages/"))))
+ '(haskell-mode-hook (quote (turn-on-haskell-indentation)) t)
+ '(package-archives
+   (quote
+    (("marmalade" . "https://marmalade-repo.org/packages/")
+     ("melpa" . "http://melpa.milkbox.net/packages/")
+     ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(py-indent-offset 2 t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "grey24" :foreground "gainsboro" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 80 :width normal :foundry "unknown" :family "DejaVu Sans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "grey16" :foreground "gainsboro" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "DejaVu Sans Mono"))))
  '(column-enforce-face ((t (:background "DeepSkyBlue4"))))
  '(comint-highlight-input ((t (:foreground "sandy brown" :weight bold))))
  '(comint-highlight-prompt ((t (:foreground "green1"))))
  '(cursor ((t (:background "#fc0"))))
+ '(fixmee-notice-face ((t (:background "magenta3" :foreground "yellow"))))
  '(flymake-infoline ((((class color) (background dark)) (:background "DarkRed"))))
- '(font-lock-comment-face ((t (:foreground "IndianRed1"))))
+ '(font-lock-comment-face ((t (:foreground "IndianRed1" :slant normal))))
  '(font-lock-doc-face ((t (:foreground "salmon"))))
  '(font-lock-fic-author-face ((((class color)) (:foreground "yellow"))))
  '(font-lock-fic-face ((((class color)) (:background "magenta3" :foreground "yellow" :weight bold))))
- '(font-lock-function-name-face ((t (:foreground "gold" :weight bold))))
- '(font-lock-keyword-face ((t (:foreground "SandyBrown"))))
+ '(font-lock-function-name-face ((t (:foreground "gold2" :weight bold :height 1.0))))
+ '(font-lock-keyword-face ((t (:foreground "SandyBrown" :height 1.0))))
  '(font-lock-string-face ((t (:foreground "LimeGreen" :weight bold))))
- '(font-lock-type-face ((t (:foreground "cyan2" :weight bold))))
+ '(font-lock-type-face ((t (:foreground "cyan2" :weight bold :height 1.0))))
  '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod"))))
  '(highlight-indent-face ((t (:background "gray23"))))
  '(highlight-indentation-current-column-face ((t (:background "gray20"))))
  '(highlight-indentation-face ((t (:background "gray22"))))
- '(hl-line ((t (:inherit highlight :background "gray16"))))
+ '(hl-line ((t (:inherit highlight :background "gray10"))))
  '(ido-first-match ((t (:foreground "salmon" :weight bold))))
  '(ido-only-match ((((class color)) (:foreground "SpringGreen"))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "orange"))))

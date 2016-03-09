@@ -11,8 +11,8 @@
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+    if [ -r "$HOME/.bashrc" ]; then
+	    . "$HOME/.bashrc"
     fi
 fi
 
@@ -21,16 +21,22 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-[ -r ~/.setup-p4 ] && . ~/.setup-p4
 
-# do we have prodaccess?
-# [ -x "$(which prodcertstatus)" ] && prodcertstatus
+# HS-specific
+export HS_ROOT=$HOME/src/handshake
 
 # Enable SSH agent
 [ -r ~/.ssh-agent ] && . ~/.ssh-agent > ~/.ssh-agent-output
 
+# Pythin-specific config
+if [ -r ~/.pystartup.py ]; then
+   export PYTHONSTARTUP="$HOME/.pystartup.py"
+fi
+
 # Can attach to TMUX if we're interactive and not yet in
-if [ -n ${SSH_TTY} ] && [ -z ${TMUX} ] && killall -q -0 tmux; then
+if [ -n ${SSH_TTY} ] && [ -z ${TMUX} ] && killall -0 tmux; then
     echo "A tmux session is present. Consider typing"
     echo "tmux attach"
 fi
+
+

@@ -8,6 +8,11 @@
 # Note that PYTHONSTARTUP does *not* expand "~", so you have to put in the
 # full path to your home directory.
 
+# NOTE: if the history file was empty and now an IOError happens when it
+# is read, append this to the top:
+# _HiStOrY_V2_
+# This is OSX's libedit that feigns being readline.
+
 import atexit
 import os
 import sys
@@ -17,8 +22,11 @@ def setupReadlineAndHistory(history_path):
   try:
     import readline
     import rlcompleter
-    # change autocomplete to tab
-    readline.parse_and_bind("tab: complete")
+    import sys
+    if(sys.platform == 'darwin') and 'libedit' in readline.__doc__:
+        readline.parse_and_bind ("bind ^I rl_complete") # OSX-compatible
+    else:
+      readline.parse_and_bind("tab: complete")  # Linux-compatible
     # prepare history saving
     def save_history(history_path=history_path):
         import readline

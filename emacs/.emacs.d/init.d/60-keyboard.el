@@ -20,15 +20,24 @@
 (global-set-key (kbd "C-j") 'join-line)
 (global-set-key (kbd "C-c j") 'join-line)
 
-(global-set-key (kbd "s-w") 'kill-this-buffer)
-(global-set-key (kbd "C-X C-\\") 'kill-this-buffer)
-(global-set-key (kbd "s-<f5>") 'revert-buffer)
+
+; buffer lifecycle.
+(global-set-key (kbd "C-x <f5>") 'revert-buffer)
+(global-set-key (kbd "C-x C-\\") 'kill-this-buffer)
+
 
 ; M-click opens file at mouse
 (global-set-key (kbd "<M-down-mouse-1>") 'ffap-at-mouse)
 
-; TODO: move to a separate file?
+; home / end on OSX
+(global-set-key (kbd "<home>") 'move-beginning-of-line)
+(global-set-key (kbd "<end>") 'move-end-of-line)
+
+
+; TODO: move to a separate file, like minor-modes.el?
 (delete-selection-mode 1)
+(if (boundp 'back-button) (back-button-mode t))
+(desktop-save-mode t)
 
 ; Outline mode keys rebound more nicely
 (defun my-outline-mode-key-bindings ()

@@ -18,6 +18,11 @@
 
 (setq show-trailing-whitespace t) ;; highlight it everywhere
 
+;; OSX-specific: font rendering
+(setq line-spacing 1)
+(setq mac-allow-anti-aliasing nil)
+
+
 ;; set frame title to filename
 (setq frame-title-format
   '("" invocation-name ": "(:eval (if (buffer-file-name)

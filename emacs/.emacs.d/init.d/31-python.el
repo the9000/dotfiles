@@ -24,4 +24,8 @@
   (show-paren-mode 1)
   ; mark excessively long lines if available
   (if (fboundp 'column-enforce-mode) (column-enforce-mode))
+  ; show fixme warnings if the mode is available
+  (if (fboundp 'fixmee-mode) (fixmee-mode))
+  ; always show trailing space
+  (setq show-trailing-whitespace 1)
 )
