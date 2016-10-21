@@ -36,12 +36,12 @@
     shon = show --oneline --name-only
 	feap = fetch --all --prune
 	br = branch
-    feap = fetch --all --prune
 	jira-co = "!f() { b=$1; shift; { git branch && git branch -r ; } | awk -v rpat=^[^/]*/$b -v pat=^$b '$1 ~ pat || $1 ~ rpat { print ; exit ; }' | cut -d/ -f2 | xargs -I{} git co {} $@; }; f"
 [core]
     pager = less -FRSX
 	excludesfile = ~/.gitignore
-    editor = femacs
+    editor = EE
+    mdiff = !sh -c 'git diff master:./$1 $1' -
 [gui]
 	recentrepo = /home/dcheryasov/work/monitoring
 	editor = E
@@ -53,11 +53,11 @@
 [color "status"]
     branch = bold
     added = green bold
-    changed = cyan bold 
+    changed = cyan bold
     untracked = yellow dim
     # color of conflicts
     unmerged = magenta bold
-    
+
 [push]
 	default = current
 [diff]
