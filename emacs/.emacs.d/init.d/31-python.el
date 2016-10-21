@@ -23,9 +23,11 @@
   ; initially hide all but the headers: (hide-body)
   (show-paren-mode 1)
   ; mark excessively long lines if available
-  (if (fboundp 'column-enforce-mode) (column-enforce-mode))
+  (if (fboundp 'highlight-indent-guides-mode) (highlight-indent-guides-mode))
   ; show fixme warnings if the mode is available
-  (if (fboundp 'fixmee-mode) (fixmee-mode))
+  (if (fboundp 'fixmee-mode) (fixmee-mode t))
   ; always show trailing space
   (setq show-trailing-whitespace 1)
+  ;; kill trailing whitespace on save
+  (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 )

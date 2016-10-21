@@ -34,10 +34,27 @@
 (global-set-key (kbd "<end>") 'move-end-of-line)
 
 
-; TODO: move to a separate file, like minor-modes.el?
+;; Unbind the treacherous super-w that closes a frame without asking.
+(global-unset-key (kbd "s-w"))
+
+;; Package-specifc niceties.
+;; // TODO: move to a separate file, like minor-modes.el.
+;; Make major mode setup files consult or inform it.
+
 (delete-selection-mode 1)
 (if (boundp 'back-button) (back-button-mode t))
 (desktop-save-mode t)
+(if (boundp 'fixmee-mode) (fixmee-mode t))
+(if (boundp 'recent-mode) (recent-mode t))
+(if (fboundp 'find-file-in-repository)
+    (global-set-key (kbd "M-g r") 'find-file-in-repository))
+(if (fboundp 'string-inflection-all-cycle)
+    (global-set-key (kbd "C-c -") 'string-inflection-all-cycle))
+
+(if (fboundp 'magit-status)
+    (global-set-key (kbd "C-x g") 'magit-status))
+
+;; \\
 
 ; Outline mode keys rebound more nicely
 (defun my-outline-mode-key-bindings ()
@@ -54,6 +71,7 @@
 
 ; Delete / yank overwrites regions
 (delete-selection-mode 1)
+
 
 ; Always ask before exiting.
 (setq confirm-kill-emacs 'y-or-n-p)
