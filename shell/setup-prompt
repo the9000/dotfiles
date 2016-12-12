@@ -4,6 +4,7 @@
 source colors.sh
 
 # TODO: do everything within one function that prints PS1, to keep namespace clean.
+# TODO: use an array to define a "palette".
 
 pcolor() {
     # Same as color(), but adds \[ and \] to make the color setting prompt-transparent.
@@ -75,11 +76,7 @@ cut_path_to_home() {
 }
 
 show_git_pwd() {
-    # sets the folloving env vars:
-    # PWD_NONGIT: part of PWD before git tree
-    # PWD_GIT_TREE: part of path belonging to a git work tree (or empty)
-    # PWD_GIT_BRANCH: name of current branch (or empty)
-    # PWD_GIT_CLEAN: is set, the tree is clean
+    # Prints git's part of prompt
     local nongit_attrs=$1
     shift
     local git_attrs=$1
@@ -95,6 +92,7 @@ show_git_pwd() {
         local worktree_path=${PWD#${non_git_prefix}}
         # branch + status.
         # NOTE: depends on `head` and `cut` when in headless mode.
+        # TODO: if the branch is clean, do git diff -q @{push}..head to check for pushed status.
         local branch=$(git symbolic-ref --short -q HEAD || (git branch | head -n 1 | cut -c 3-))
         local branch_attrs=$(git diff --no-ext-diff --quiet --exit-code \
             && printf "${clean_branch_attrs}" || printf "${modified_branch_attrs}")
