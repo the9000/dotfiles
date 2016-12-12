@@ -1,4 +1,11 @@
 ; load the modularized settings
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (load-file "~/.emacs.d/init.el")
 
 ; default font
@@ -27,6 +34,9 @@
     (("marmalade" . "https://marmalade-repo.org/packages/")
      ("melpa" . "http://melpa.milkbox.net/packages/")
      ("gnu" . "http://elpa.gnu.org/packages/"))))
+ '(package-selected-packages
+   (quote
+    (string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode color-theme)))
  '(py-indent-offset 2 t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
