@@ -1,5 +1,6 @@
 ;; global key bindings
 
+;;; Code:
 (global-set-key (kbd "C-z") 'undo)
 
 ; terminal-like copy-paste
@@ -43,16 +44,23 @@
 
 (delete-selection-mode 1)
 (if (boundp 'back-button) (back-button-mode t))
+
 (desktop-save-mode t)
+
 (if (boundp 'fixmee-mode) (fixmee-mode t))
 (if (boundp 'recent-mode) (recent-mode t))
+
 (if (fboundp 'find-file-in-repository)
     (global-set-key (kbd "M-g r") 'find-file-in-repository))
+
 (if (fboundp 'string-inflection-all-cycle)
     (global-set-key (kbd "C-c -") 'string-inflection-all-cycle))
 
 (if (fboundp 'magit-status)
     (global-set-key (kbd "C-x g") 'magit-status))
+
+(if (fboundp 'ace-window)
+    (global-set-key (kbd "C-S-a") 'ace-window))
 
 ;; \\
 
