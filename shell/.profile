@@ -16,27 +16,9 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+# Execute .profile.d one-purpose files.
+if [ -d ~/.profile.d ]; then
+    for init_file in ~/.profile.d/*.sh; do
+        source ${init_file}
+    done
 fi
-
-
-# HS-specific
-export HS_ROOT=$HOME/src/handshake
-
-# Enable SSH agent
-[ -r ~/.ssh-agent ] && . ~/.ssh-agent > ~/.ssh-agent-output
-
-# Pythin-specific config
-if [ -r ~/.pystartup.py ]; then
-   export PYTHONSTARTUP="$HOME/.pystartup.py"
-fi
-
-# Can attach to TMUX if we're interactive and not yet in
-if [ -n ${SSH_TTY} ] && [ -z ${TMUX} ] && killall -0 tmux; then
-    echo "A tmux session is present. Consider typing"
-    echo "tmux attach"
-fi
-
-
