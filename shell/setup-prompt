@@ -93,12 +93,14 @@ show_git_pwd() {
         # branch + status.
         # NOTE: depends on `head` and `cut` when in headless mode.
         local branch=$(git symbolic-ref --short -q HEAD || (git branch | head -n 1 | cut -c 3-))
+        # In an empty repo, there can be no branch at all!
+        branch=${branch:-'<no branch>'}
         # The branch is dirty and unpushed unless proven otherwise.
         local branch_attrs="${modified_branch_attrs}"
         local push_attrs="${modified_branch_attrs}"
         if git diff --no-ext-diff --quiet --exit-code; then
             branch_attrs="${clean_branch_attrs}"
-            if git diff --quiet @{push}..head; then
+            if git diff --quiet @{push}..HEAD 2>/dev/null; then
                 push_attrs="${clean_branch_attrs}"
             fi
         fi
