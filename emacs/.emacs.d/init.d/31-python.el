@@ -22,12 +22,20 @@
   (outline-minor-mode t)
   ; initially hide all but the headers: (hide-body)
   (show-paren-mode 1)
-  ; mark excessively long lines if available
+  ; always show trailing space
+  (setq show-trailing-whitespace 1)
+  ; show nice indentation.
   (if (fboundp 'highlight-indent-guides-mode) (highlight-indent-guides-mode))
   ; show fixme warnings if the mode is available
   (if (fboundp 'fixmee-mode) (fixmee-mode t))
-  ; always show trailing space
-  (setq show-trailing-whitespace 1)
+  ; Limit line length.
+  (if (fboundp 'column-enforce-n) (column-enforce-n 100))
+  ; Highlight symbol under cursor.
+  (if (fboundp 'highlight-symbol-mode) (highlight-symbol-mode))
+  ; Run Semantic mode.
+  (if (fboundp 'semantic-mode) (semantic-mode))
+  ; Flycheck.
+  (if (fboundp 'flycheck-mode) (flycheck-mode))
   ;; kill trailing whitespace on save
   (add-to-list 'write-file-functions 'delete-trailing-whitespace)
 )
