@@ -60,7 +60,9 @@
     (global-set-key (kbd "C-x g") 'magit-status))
 
 (if (fboundp 'ace-window)
-    (global-set-key (kbd "C-S-a") 'ace-window))
+    (global-set-key (kbd "C-x w") 'ace-window) ;; Works everywhere.
+    (global-set-key (kbd "C-S-o") 'ace-window) ;; Fewer presses.
+  )
 
 ;; \\
 
