@@ -35,11 +35,19 @@
     cpx = cherry-pick -x
     shon = show --oneline --name-only
 	feap = fetch --all --prune
+    wt = worktree
+    # WTB: worktree branch.
+    # git wtb foobar  # creates branch foobar off master in worktree ../foobar
+    # git wtb foobar some-branch  # creates branch foobar off some-branch in worktree ../foobar
+    wtb = "!f() { local git_pwd=$(git rev-parse --show-toplevel); git worktree add -b dc-$1 ${git_pwd}.$1 ${2:-master};}; f"
     # fo = ferch origin, analogous to pull without checking the branch out.
     fo = !sh -c 'git fetch origin $1:$1' -
     mdiff = !sh -c 'git diff master:./$1 $1' -
 	br = branch
 	jira-co = "!f() { b=$1; shift; { git branch && git branch -r ; } | awk -v rpat=^[^/]*/$b -v pat=^$b '$1 ~ pat || $1 ~ rpat { print ; exit ; }' | cut -d/ -f2 | xargs -I{} git co {} $@; }; f"
+	committers = shortlog -s -n --all
+	# map command to all submodules.
+	sub = "submodule foreach git"
 [core]
     pager = less -FRSX
 	excludesfile = ~/.gitignore
