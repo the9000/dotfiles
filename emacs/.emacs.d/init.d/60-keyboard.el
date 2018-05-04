@@ -61,7 +61,7 @@
 
 (if (fboundp 'ace-window)
     (progn
-      (global-set-key (kbd "C-x w") 'ace-window) ;; Works everywhere.
+      (global-set-key (kbd "C-x w") 'ace-window) ;; Works in term; not Cx Cw.
       (global-set-key (kbd "C-S-o") 'ace-window) ;; Fewer presses.
     )
   )
