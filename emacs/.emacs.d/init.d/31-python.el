@@ -27,7 +27,7 @@
   ; show nice indentation.
   (if (fboundp 'highlight-indent-guides-mode) (highlight-indent-guides-mode))
   ; show fixme warnings if the mode is available
-  (if (fboundp 'fixmee-mode) (fixmee-mode t))
+  (if (fboundp 'hl-todo-mode) (hl-todo-mode t))
   ; Limit line length.
   (if (fboundp 'column-enforce-n) (column-enforce-n 100))
   ; Highlight symbol under cursor.
