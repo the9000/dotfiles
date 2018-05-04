@@ -47,7 +47,7 @@
 
 (desktop-save-mode t)
 
-(if (boundp 'fixmee-mode) (fixmee-mode t))
+(if (boundp 'hl-todo-mode) (hl-todo-mode t))
 (if (boundp 'recent-mode) (recent-mode t))
 
 (if (fboundp 'find-file-in-repository)
