@@ -28,7 +28,63 @@
    "\\(@@@+\\|\\_<\\(?:[Tt][Oo][Dd][Oo]+\\|[Ff][Ii][Xx][Mm][Ee]+\\|XXX+\\|YYY+\\)\\)\\(?:[/:?!. 	
 ]+\\|-+\\(?:\\s-\\|[
 ]\\)\\|\\_>\\)")
+ '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
+ '(flycheck-navigation-minimum-level (quote warning))
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
+ '(hl-todo-keyword-faces
+   (quote
+    (("TODO" . font-lock-type-face)
+     ("NEXT" . "burlywood1")
+     ("FAIL" . "cyan")
+     ("NOTE" . font-lock-string-face)
+     ("HACK" . "green")
+     ("FIXME" . "yellow")
+     ("XXX" . "yellow")
+     ("DONE" . font-lock-string-face))))
+ '(ibuffer-filter-group-name-face (quote font-lock-function-name-face))
+ '(ibuffer-fontification-alist
+   (quote
+    ((10 buffer-read-only font-lock-constant-face)
+     (15
+      (and buffer-file-name
+           (string-match ibuffer-compressed-file-name-regexp buffer-file-name))
+      font-lock-doc-face)
+     (20
+      (string-match "^*"
+                    (buffer-name))
+      font-lock-keyword-face)
+     (25
+      (and
+       (string-match "^ "
+                     (buffer-name))
+       (null buffer-file-name))
+      italic)
+     (30
+      (memq major-mode ibuffer-help-buffer-modes)
+      font-lock-string-face)
+     (35
+      (derived-mode-p
+       (quote dired-mode))
+      font-lock-function-name-face))))
+ '(ispell-extra-args (quote ("\"--sug-mode=fast\"")))
+ '(ispell-highlight-face (quote flyspell-incorrect))
+ '(ispell-program-name "/usr/local/bin/aspell")
+ '(json-reformat:indent-width 2)
+ '(magit-diff-refine-hunk t)
+ '(markdown-command "/usr/local/bin/pandoc --from=markdown --to=html")
+ '(org-agenda-window-setup (quote other-window))
+ '(org-drawers (quote ("PROPERTIES" "CLOCK" "LOGBOOK" "RESULTS" "MORE")))
+ '(org-priority-faces (quote ((67 . "firebrick4") (65 . "cyan"))))
+ '(org-src-window-setup (quote other-frame))
+ '(org-todo-keyword-faces
+   (quote
+    (("WAIT" . "gray")
+     ("WIP" . "yellow")
+     ("CANCEL" . "cyan3")
+     ("FAIL" . "MediumOrchid3"))))
+ '(org-todo-keywords
+   (quote
+    ((sequence "TODO(t)" "WIP(p)" "WAIT(w)" "|" "CANCEL(c)" "DONE(d)" "FAIL(f)"))))
  '(package-archives
    (quote
     (("marmalade" . "https://marmalade-repo.org/packages/")
@@ -38,6 +94,7 @@
    (quote
     (string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode color-theme)))
  '(py-indent-offset 2 t))
+ '(sentence-end-double-space nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -48,8 +105,22 @@
  '(comint-highlight-input ((t (:foreground "sandy brown" :weight bold))))
  '(comint-highlight-prompt ((t (:foreground "green1"))))
  '(cursor ((t (:background "#fc0"))))
+ '(ediff-even-diff-A ((t (:background "purple4"))))
+ '(ediff-even-diff-B ((t (:background "DarkSeaGreen4"))))
+ '(ediff-odd-diff-A ((t (:background "CadetBlue4"))))
+ '(ediff-odd-diff-B ((t (:background "orange4"))))
+ '(error ((t (:foreground "tomato" :weight bold))))
  '(fixmee-notice-face ((t (:background "magenta3" :foreground "yellow"))))
+ '(flycheck-error ((t (:underline (:color "Red1" :style wave)))))
+ '(flycheck-error-list-checker-name ((t (:inherit font-lock-keyword-face))))
+ '(flycheck-error-list-error ((t (:inherit error))))
+ '(flycheck-error-list-id-with-explainer ((t (:inherit flycheck-error-list-id))))
+ '(flycheck-error-list-info ((t (:inherit shadow))))
+ '(flycheck-fringe-error ((t (:background "red" :foreground "yellow"))))
+ '(flycheck-fringe-info ((t (:foreground "green4"))))
  '(flymake-infoline ((((class color) (background dark)) (:background "DarkRed"))))
+ '(flyspell-duplicate ((t (:underline (:color "cornflower blue" :style wave)))))
+ '(flyspell-incorrect ((t (:underline (:color "yellow" :style wave)))))
  '(font-lock-comment-face ((t (:foreground "IndianRed1" :slant normal))))
  '(font-lock-doc-face ((t (:foreground "salmon"))))
  '(font-lock-fic-author-face ((((class color)) (:foreground "yellow"))))
@@ -59,11 +130,16 @@
  '(font-lock-string-face ((t (:foreground "LimeGreen" :weight bold))))
  '(font-lock-type-face ((t (:foreground "cyan2" :weight bold :height 1.0))))
  '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod"))))
+ '(hi-blue-b ((t (:background "dark slate blue" :foreground "DeepSkyBlue1" :weight bold))))
  '(highlight-indent-face ((t (:background "gray23"))))
+ '(highlight-indent-guides-character-face ((t (:foreground "#4c4c4c"))))
  '(highlight-indent-guides-even-face ((t (:background "gray16"))))
+ '(highlight-indent-guides-odd-face ((t (:background "gray20"))))
  '(highlight-indentation-current-column-face ((t (:background "gray20"))))
  '(highlight-indentation-face ((t (:background "gray22"))))
+ '(highlight-symbol-face ((t (:background "black" :underline "SpringGreen1"))))
  '(hl-line ((t (:inherit highlight :background "gray10"))))
+ '(hl-todo ((t (:background "magenta3" :foreground "yellow" :weight bold))))
  '(ido-first-match ((t (:foreground "salmon" :weight bold))))
  '(ido-only-match ((((class color)) (:foreground "SpringGreen"))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "orange"))))
@@ -72,6 +148,14 @@
  '(linum ((t (:inherit (shadow default) :background "gray20" :foreground "yellow4"))))
  '(magit-blame-heading ((t (:background "grey25" :foreground "deep sky blue"))))
  '(org-level-1 ((t (:foreground "gray75" :underline t :height 1.5))))
+ '(magit-section-highlight ((t (:background "black"))))
+ '(markdown-code-face ((t (:foreground "cyan2"))))
+ '(markdown-markup-face ((t (:foreground "green3" :slant normal :weight normal))))
+ '(org-checkbox ((t (:inherit org-date :underline nil))))
+ '(org-level-1 ((t (:foreground "PaleTurquoise1" :overline t :height 1.5 :family "DejaVu Sans"))))
+ '(org-level-2 ((t (:inherit outline-2 :overline t :height 1.1))))
+ '(org-tag ((t (:box (:line-width 1 :color "grey50" :style released-button) :weight bold))))
+ '(org-todo ((t (:foreground "Pink" :inverse-video t :weight bold))))
  '(outline-1 ((t (:foreground "Cyan2"))))
  '(outline-2 ((t (:foreground "pale green"))))
  '(outline-3 ((t (:foreground "khaki"))))
@@ -79,7 +163,10 @@
  '(sh-heredoc ((t (:foreground "aquamarine2" :weight bold))))
  '(sh-quoted-exec ((((class color) (background dark)) (:foreground "DarkOliveGreen1" :weight bold))))
  '(show-paren-match ((t (:background "sienna4"))))
+ '(variable-pitch ((t (:family "DejaVu Sans"))))
+ '(web-mode-html-attr-name-face ((t (:foreground "light green"))))
  '(web-mode-html-tag-face ((t (:inherit font-lock-function-name-face))))
+ '(web-mode-json-key-face ((t (:foreground "goldenrod2"))))
  '(web-mode-variable-name-face ((t (:inherit font-lock-constant-face :weight bold)))))
 
 ;; Note: work around a bug that breaks cursor color setting via customize.
