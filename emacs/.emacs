@@ -30,6 +30,7 @@
 ]\\)\\|\\_>\\)")
  '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
  '(flycheck-navigation-minimum-level (quote warning))
+ '(flycheck-python-pylint-executable "/Users/dcheryasov/work/venvs/svc-scripts/bin/pylint")
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
  '(hl-todo-keyword-faces
    (quote
@@ -92,15 +93,18 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode color-theme)))
- '(py-indent-offset 2 t))
+    (gradle-mode helm helm-core helm-descbinds helm-describe-modes helm-dired-recent-dirs helm-flymake helm-flyspell helm-fuzzy-find helm-ls-git helm-ag lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode color-theme)))
+ '(py-indent-offset 2 t)
+ '(pylint-command "/Users/dcheryasov/work/venvs/svc-scripts/bin/prospector")
+ '(pylint-options (quote ("--output-format=emacs")))
  '(sentence-end-double-space nil)
+ '(venv-location "/Users/dcheryasov/work/venvs/"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "grey16" :foreground "honeydew3" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 110 :width normal :foundry "nil" :family "DejaVu Sans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "grey16" :foreground "gainsboro" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "nil" :family "DejaVu Sans Mono"))))
  '(column-enforce-face ((t (:background "DeepSkyBlue4"))))
  '(comint-highlight-input ((t (:foreground "sandy brown" :weight bold))))
  '(comint-highlight-prompt ((t (:foreground "green1"))))
@@ -147,7 +151,6 @@
  '(js2-function-param ((t (:foreground "SeaGreen2"))))
  '(linum ((t (:inherit (shadow default) :background "gray20" :foreground "yellow4"))))
  '(magit-blame-heading ((t (:background "grey25" :foreground "deep sky blue"))))
- '(org-level-1 ((t (:foreground "gray75" :underline t :height 1.5))))
  '(magit-section-highlight ((t (:background "black"))))
  '(markdown-code-face ((t (:foreground "cyan2"))))
  '(markdown-markup-face ((t (:foreground "green3" :slant normal :weight normal))))
@@ -160,6 +163,8 @@
  '(outline-2 ((t (:foreground "pale green"))))
  '(outline-3 ((t (:foreground "khaki"))))
  '(outline-4 ((t (:foreground "burlywood"))))
+ '(package-status-dependency ((t (:inherit font-lock-function-name-face))))
+ '(package-status-installed ((t (:inherit font-lock-string-face))))
  '(sh-heredoc ((t (:foreground "aquamarine2" :weight bold))))
  '(sh-quoted-exec ((((class color) (background dark)) (:foreground "DarkOliveGreen1" :weight bold))))
  '(show-paren-match ((t (:background "sienna4"))))
@@ -177,3 +182,4 @@
 (message ".emacs done")
 (put 'narrow-to-region 'disabled nil)
 (put 'set-goal-column 'disabled nil)
+(put 'erase-buffer 'disabled nil)
