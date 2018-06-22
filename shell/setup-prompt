@@ -91,23 +91,24 @@ show_git_pwd() {
         local non_git_prefix=$(dirname "$git_toplevel")"/"
         local worktree_path=${PWD#${non_git_prefix}}
         # branch + status.
-        # NOTE: depends on `head` and `cut` when in headless mode.
-        local branch=$(git symbolic-ref --short -q HEAD || (git branch | head -n 1 | cut -c 3-))
+        # NOTE: depends on `head` and `cut`; --symbolic-ref shows non-existent 'master'
+        local branch=$(git branch | head -n 1 | cut -c 3-)
+        branch=${branch:-"<no branch>"}
         # The branch is dirty and unpushed unless proven otherwise.
         local branch_attrs="${modified_branch_attrs}"
         local push_attrs="${modified_branch_attrs}"
         if git diff --no-ext-diff --quiet --exit-code; then
             branch_attrs="${clean_branch_attrs}"
-            if git diff --quiet @{push}..head; then
+            if git diff --quiet @{push}..HEAD 2>/dev/null; then
                 push_attrs="${clean_branch_attrs}"
             fi
         fi
         # final output
-        printf "${nongit_attrs}${non_git_prefix}${git_attrs}${worktree_path}"
+        printf "${nongit_attrs}$(cut_path_to_home ${non_git_prefix})${git_attrs}${worktree_path}"
         printf "${push_attrs} @ ${branch_attrs}${branch}"
     else
         # git did not work. show a regular path
-        printf "${nongit_attrs}${PWD}"
+        printf "${nongit_attrs}$(cut_path_to_home ${PWD})"
     fi
 }
 
