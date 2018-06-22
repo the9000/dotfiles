@@ -74,8 +74,8 @@
   (interactive)
   (local-set-key (kbd "C-c <up>") 'hide-subtree)
   (local-set-key (kbd "C-c <down>") 'show-subtree)
-  (local-set-key (kbd "C-S-c <up>") 'hide-body)
-  (local-set-key (kbd "C-S-c <down>") 'show-all)
+  (local-set-key (kbd "C-c <left>") 'hide-body)
+  (local-set-key (kbd "C-c <right>") 'show-all)
 )
 
 (add-hook 'outline-mode-hook 'my-outline-mode-key-bindings)
