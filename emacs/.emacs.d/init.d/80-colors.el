@@ -5,7 +5,7 @@
   nil
 )
 (require 'color-theme)
-(color-theme-gray30)
+;; XXX (color-theme-gray30)
 ; TODO: consider a fully custom theme
 
 (global-hl-line-mode t) ; highlight current line for all modes by default
