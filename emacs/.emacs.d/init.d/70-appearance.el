@@ -1,7 +1,7 @@
 ;; Editing settings
 
 ; default font
-(set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-90-*-*-m-0-iso10646-1")
+; XXX (set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-90-*-*-m-0-iso10646-1")
 
 ; use only spaces and no tabs
 (setq-default indent-tabs-mode nil)
