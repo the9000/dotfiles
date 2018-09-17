@@ -81,6 +81,20 @@
 (add-hook 'outline-mode-hook 'my-outline-mode-key-bindings)
 (add-hook 'outline-minor-mode-hook 'my-outline-mode-key-bindings)
 
+;; Hide-show mode key bindings.
+
+(defun my-hs-minor-mode-key-bindings ()
+  "Usable whenever outline (minor) mode is invoked."
+  (interactive)
+  (local-set-key (kbd "C-c <up>") 'hs-hide-block)
+  (local-set-key (kbd "C-c <down>") 'hs-show-block)
+  (local-set-key (kbd "C-c <left>") 'hs-hide-level)
+  (local-set-key (kbd "C-c <right>") 'hs-show-all)
+)
+
+(add-hook 'hs-minor-mode-hook 'my-hs-minor-mode-key-bindings)
+
+
 ; Delete / yank overwrites regions
 (delete-selection-mode 1)
 
