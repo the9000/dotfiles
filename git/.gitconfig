@@ -1,6 +1,6 @@
 [user]
-	name = Dmitry Cheryasov
-    email = dcheryasov@handshake.com
+    name = Dmitry Cheryasov
+    email = dcheryasov@grubhub.com
 [color]
     filemode = false
     diff = auto
@@ -12,21 +12,23 @@
 [alias]
     b = branch
     ci = commit -v
-	co = checkout
+    co = checkout
     cob = checkout -b
     d = diff
     l = log
-    lg = log --graph --pretty=format:'%C(green)%h%Creset -%C(bold blue)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset' --abbrev-commit --date=relative
-    lga = log --graph --pretty=format:'%C(green)%h%Creset -%C(bold blue)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset' --abbrev-commit --date=relative --branches
-	st = status
+    lg = log --graph --pretty=format:'%C(green)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset' --abbrev-commit --date=relative
+    lga = log --graph --pretty=format:'%C(green)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset' --abbrev-commit --date=relative --branches
+    lg5 = "!git lg -n 5"
+    st = status
     fixup = !sh -c 'git commit -a -m \"fixup! $(git log -1 --format='%s' $@)\"' -
     squ = !sh -c 'git commit -a -m \"squash! $(git log -1 --format='%s' $@)\"' -
     ri = rebase --interactive
     rc = rebase --continue
     push-review = push origin HEAD:refs/for/master
     last = log -p -n 1
-    lst = log -p -n 1 --name-only
     last5 = log -p -n 5
+    lst = log -p -n 1 --name-only
+    lst5 = log -p -n 5 --name-only
     unadd = reset
     unstage = rm --cached
     pull-rebase = pull --rebase origin master
@@ -34,7 +36,7 @@
     cp = cherry-pick
     cpx = cherry-pick -x
     shon = show --oneline --name-only
-	feap = fetch --all --prune
+    feap = fetch --all --prune
     wt = worktree
     # WTB: worktree branch.
     # git wtb foobar  # creates branch foobar off master in worktree ../foobar
@@ -43,18 +45,18 @@
     # fo = ferch origin, analogous to pull without checking the branch out.
     fo = !sh -c 'git fetch origin $1:$1' -
     mdiff = !sh -c 'git diff master:./$1 $1' -
-	br = branch
-	jira-co = "!f() { b=$1; shift; { git branch && git branch -r ; } | awk -v rpat=^[^/]*/$b -v pat=^$b '$1 ~ pat || $1 ~ rpat { print ; exit ; }' | cut -d/ -f2 | xargs -I{} git co {} $@; }; f"
-	committers = shortlog -s -n --all
-	# map command to all submodules.
-	sub = "submodule foreach git"
+    br = branch
+    jira-co = "!f() { b=$1; shift; { git branch && git branch -r ; } | awk -v rpat=^[^/]*/$b -v pat=^$b '$1 ~ pat || $1 ~ rpat { print ; exit ; }' | cut -d/ -f2 | xargs -I{} git co {} $@; }; f"
+    committers = shortlog -s -n --all
+    # map command to all submodules.
+    sub = "submodule foreach git"
 [core]
     pager = less -FRSX
-	excludesfile = ~/.gitignore
+    excludesfile = ~/.gitignore
     editor = EE
 [gui]
-	recentrepo = /home/dcheryasov/work/monitoring
-	editor = E
+    recentrepo = /home/dcheryasov/work/monitoring
+    editor = E
 
 [color "branch"]
     current = green bold
@@ -78,3 +80,6 @@
 	fontdiff = DejaVu Sans Mono,11,-1,5,50,0,0,0,0,0
 [branch]
 	autosetuprebase = always
+[github]
+	user = dcheryasov@grubhub.com
+	oauth-token = 6ed3856d64cea92ebb348213b9e8a2f7a845f851
