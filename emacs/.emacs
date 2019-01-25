@@ -48,7 +48,7 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (helm-ag helm-flymake helm-flyspell helm-fuzzy-find helm-git-grep helm-ls-git nlinum pytest hl-todo highlight-indent-guides kotlin-mode org python-docstring column-enforce-mode flycheck flycheck-pyflakes highlight-symbol web-mode flyspell-lazy js2-mode magit markdown-mode virtualenvwrapper ace-window flymake-hlint haskell-mode color-theme-modern)))
+    (unicode-enbox helm-ag helm-flymake helm-flyspell helm-fuzzy-find helm-git-grep helm-ls-git nlinum pytest hl-todo highlight-indent-guides kotlin-mode org python-docstring column-enforce-mode flycheck flycheck-pyflakes highlight-symbol web-mode flyspell-lazy js2-mode magit markdown-mode virtualenvwrapper ace-window flymake-hlint haskell-mode color-theme-modern)))
  '(venv-location "~/venvs"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -85,4 +85,7 @@
  '(outline-2 ((t (:foreground "pale green"))))
  '(outline-3 ((t (:foreground "khaki"))))
  '(outline-4 ((t (:foreground "burlywood"))))
- '(sh-quoted-exec ((((class color) (background dark)) (:foreground "DarkOliveGreen1" :weight bold)))))
+ '(sh-quoted-exec ((((class color) (background dark)) (:foreground "DarkOliveGreen1" :weight bold))))
+ '(web-mode-html-tag-bracket-face ((t (:inherit font-lock-keyword-face))))
+ '(web-mode-html-tag-custom-face ((t (:inherit font-lock-function-name-face))))
+ '(web-mode-html-tag-face ((t (:inherit font-lock-keyword-face)))))
