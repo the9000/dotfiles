@@ -8,16 +8,6 @@
 (setq-default indent-tabs-mode nil)
 (setq default-tab-width 4)
 
-; we want line numbers everywhere
-(if (fboundp 'global-nlinum-mode)
-    (global-nlinum-mode t)
-    (global-linum-mode t))
-
-; column numbes everywhere
-(column-number-mode t)
-
-(setq show-trailing-whitespace t) ;; highlight it everywhere
-
 ;; OSX-specific: font rendering
 (setq line-spacing 1)
 (setq mac-allow-anti-aliasing nil)
@@ -28,14 +18,6 @@
   '("" invocation-name ": "(:eval (if (buffer-file-name)
                 (abbreviate-file-name (buffer-file-name))
                   "%* %b"))))
-
-;; Toolbar
-(tool-bar-mode 0)
-
-;; Editing affordances
-(electric-pair-mode t)
-;; (outline-mode t)
-(ido-mode t)
 
 ;; Make buffer names short and unique
 (require 'uniquify)
