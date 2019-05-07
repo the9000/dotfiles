@@ -16,9 +16,3 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# Execute .profile.d one-purpose files.
-if [ -d ~/.profile.d ]; then
-    for init_file in ~/.profile.d/*.sh; do
-        source ${init_file}
-    done
-fi
