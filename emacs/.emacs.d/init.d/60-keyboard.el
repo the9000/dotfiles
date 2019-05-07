@@ -1,6 +1,6 @@
 ;; global key bindings
 
-;;; Code:
+;; The panic button.
 (global-set-key (kbd "C-z") 'undo)
 
 ; terminal-like copy-paste
@@ -27,13 +27,13 @@
 (global-set-key (kbd "C-x C-\\") 'kill-this-buffer)
 
 
-; M-click opens file at mouse
+; M-click and C-c . try to open file at point.
 (global-set-key (kbd "<M-down-mouse-1>") 'ffap-at-mouse)
+(global-set-key (kbd "C-c .") 'ffap)
 
 ; home / end on OSX
 (global-set-key (kbd "<home>") 'move-beginning-of-line)
 (global-set-key (kbd "<end>") 'move-end-of-line)
-
 
 ;; Unbind the treacherous super-w that closes a frame without asking.
 (global-unset-key (kbd "s-w"))
@@ -58,6 +58,17 @@
 
 (if (fboundp 'magit-status)
     (global-set-key (kbd "C-x g") 'magit-status))
+
+;; From https://emacs.stackexchange.com/a/29961/9370.
+(defun my-flip-window ()
+  (interactive)
+  (let ((win  (get-mru-window 'visible t t)))
+    (if win (progn
+              (select-frame-set-input-focus (window-frame win))
+              (select-window win))
+      (mode-line-other-buffer))))
+
+(global-set-key (kbd "C-<tab>") 'my-flip-window)
 
 (if (fboundp 'ace-window)
     (progn

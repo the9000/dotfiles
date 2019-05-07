@@ -23,3 +23,5 @@
 ;; (outline-mode t)
 (ido-mode t)
 
+;; Always show matching pairs.
+(show-paren-mode 1)
