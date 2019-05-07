@@ -19,8 +19,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ag-executable "/usr/local/bin/ag")
+ '(ag-context-lines 1)
+ '(ag-executable "ag")
  '(auth-sources (quote ("~/.authinfo" "~/.authinfo.gpg" "~/.netrc")))
+ '(aw-dispatch-always nil)
+ '(aw-dispatch-when-more-than 1)
  '(custom-safe-themes
    (quote
     ("3ddfde8b6afe9a72749b73b021ffd5a837f6b9d5c638f7c16d81ec9d346d899f" default)))
@@ -33,6 +36,8 @@
  '(flycheck-navigation-minimum-level (quote warning))
  '(flycheck-python-pylint-executable "/Users/dcheryasov/work/venvs/svc-scripts/bin/pylint")
  '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
+ '(highlight-indent-guides-auto-even-face-perc 0)
+ '(highlight-symbol-idle-delay 0.75)
  '(hl-todo-keyword-faces
    (quote
     (("TODO" . font-lock-type-face)
@@ -70,7 +75,8 @@
       font-lock-function-name-face))))
  '(ispell-extra-args (quote ("\"--sug-mode=fast\"")))
  '(ispell-highlight-face (quote flyspell-incorrect))
- '(ispell-program-name "/usr/local/bin/aspell")
+ '(ispell-program-name "aspell")
+ '(js-indent-level 2)
  '(json-reformat:indent-width 2)
  '(magit-diff-refine-hunk t)
  '(magithub-clone-default-directory nil)
@@ -96,19 +102,22 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (browse-kill-ring magithub highline crosshairs groovy-mode magit-todos helm-org-rifle gradle-mode helm helm-core helm-descbinds helm-describe-modes helm-dired-recent-dirs helm-flymake helm-flyspell helm-fuzzy-find helm-ls-git helm-ag lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode color-theme)))
- '(py-indent-offset 2 t)
+    (ox-jira js2-refactor docker protobuf-mode docker-compose-mode nodejs-repl python-mode ruby-mode rust-mode browse-kill-ring magithub highline crosshairs groovy-mode magit-todos helm-org-rifle gradle-mode helm helm-core helm-descbinds helm-describe-modes helm-dired-recent-dirs helm-flymake helm-flyspell helm-fuzzy-find helm-ls-git helm-ag lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode color-theme)))
+ '(py-indent-offset 2)
+ '(py-split-window-on-execute t)
  '(pylint-command "/Users/dcheryasov/work/venvs/svc-scripts/bin/prospector")
  '(pylint-options (quote ("--output-format=emacs")))
  '(sentence-end-double-space nil)
- '(venv-location "/Users/dcheryasov/work/venvs/"))
+ '(show-trailing-whitespace t)
+ '(venv-location "/home/dmitry/work/venvs/"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "grey16" :foreground "gainsboro" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "nil" :family "DejaVu Sans Mono"))))
- '(column-enforce-face ((t (:background "DeepSkyBlue4"))))
+ '(aw-leading-char-face ((t (:background "black" :foreground "red" :height 3.0))))
+ '(column-enforce-face ((t (:background "dark slate gray"))))
  '(comint-highlight-input ((t (:foreground "sandy brown" :weight bold))))
  '(comint-highlight-prompt ((t (:foreground "green1"))))
  '(cursor ((t (:background "#fc0"))))
@@ -150,8 +159,11 @@
  '(ido-first-match ((t (:foreground "salmon" :weight bold))))
  '(ido-only-match ((((class color)) (:foreground "SpringGreen"))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "orange"))))
+ '(js2-error ((t (:foreground "orange red"))))
  '(js2-external-variable ((t (:foreground "violet"))))
  '(js2-function-param ((t (:foreground "SeaGreen2"))))
+ '(js2-object-property ((t (:inherit font-lock-variable-name-face))))
+ '(line-number ((t (:inherit (linum shadow default)))))
  '(linum ((t (:inherit (shadow default) :background "gray20" :foreground "yellow4"))))
  '(magit-blame-heading ((t (:background "grey25" :foreground "deep sky blue"))))
  '(magit-diff-file-heading ((t (:foreground "turquoise2" :weight bold))))
@@ -176,7 +188,7 @@
  '(package-status-dependency ((t (:inherit font-lock-function-name-face))))
  '(package-status-installed ((t (:inherit font-lock-string-face))))
  '(sh-heredoc ((t (:foreground "aquamarine2" :weight bold))))
- '(sh-quoted-exec ((((class color) (background dark)) (:foreground "DarkOliveGreen1" :weight bold))))
+ '(sh-quoted-exec ((t (:foreground "deep sky blue"))))
  '(show-paren-match ((t (:background "sienna4"))))
  '(smerge-lower ((t (:background "#224433"))))
  '(smerge-refined-added ((t (:inherit smerge-refined-change :background "dark green"))))
