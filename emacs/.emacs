@@ -48,7 +48,8 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (unicode-enbox helm-ag helm-flymake helm-flyspell helm-fuzzy-find helm-git-grep helm-ls-git nlinum pytest hl-todo highlight-indent-guides kotlin-mode org python-docstring column-enforce-mode flycheck flycheck-pyflakes highlight-symbol web-mode flyspell-lazy js2-mode magit markdown-mode virtualenvwrapper ace-window flymake-hlint haskell-mode color-theme-modern)))
+    (toml-mode unicode-enbox helm-ag helm-flymake helm-flyspell helm-fuzzy-find helm-git-grep helm-ls-git nlinum pytest hl-todo highlight-indent-guides kotlin-mode org python-docstring column-enforce-mode flycheck flycheck-pyflakes highlight-symbol web-mode flyspell-lazy js2-mode magit markdown-mode virtualenvwrapper ace-window flymake-hlint haskell-mode color-theme-modern)))
+ '(python-shell-interpreter "python3")
  '(venv-location "~/venvs"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -70,12 +71,15 @@
  '(font-lock-variable-name-face ((t (:foreground "LightGoldenrod"))))
  '(haskell-interactive-face-prompt ((t (:foreground "green"))))
  '(highlight-indent-face ((t (:background "gray34"))))
+ '(highlight-indent-guides-even-face ((t (:background "grey16"))))
  '(highlight-symbol-face ((t (:underline "green"))))
  '(hl-line ((t (:inherit highlight :background "gray8"))))
  '(hl-todo ((t (:background "magenta3" :foreground "yellow" :weight bold))))
  '(ido-only-match ((((class color)) (:foreground "SpringGreen"))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "orange"))))
+ '(italic ((t (:slant italic))))
  '(linum ((t (:inherit (shadow default) :background "gray20" :foreground "yellow4"))))
+ '(markdown-italic-face ((t (:inherit italic :slant italic))))
  '(markdown-markup-face ((t (:inherit success :slant normal :weight normal))))
  '(org-checkbox ((t (:inherit org-date :underline nil))))
  '(org-level-1 ((t (:inherit outline-1 :overline t :height 1.33))))
