@@ -24,7 +24,12 @@
 
 ; buffer lifecycle.
 (global-set-key (kbd "C-x <f5>") 'revert-buffer)
-(global-set-key (kbd "C-x C-\\") 'kill-this-buffer)
+
+(defun my-kill-this-buffer ()  ;; Stock kill-this-buffer can refuse to work.
+    "Kill current buffer."
+    (interactive)
+    (kill-buffer (current-buffer)))
+(global-set-key (kbd "C-x C-\\") 'my-kill-this-buffer)
 
 
 ; M-click and C-c . try to open file at point.
