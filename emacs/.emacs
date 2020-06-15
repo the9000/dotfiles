@@ -8,8 +8,10 @@
 
 (load-file "~/.emacs.d/init.el")
 
-; default font
-;; (set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-90-*-*-m-0-iso10646-1")
+;; Default font setting is per frame, so it cannot easily live in .emacs.d/
+;; which runs once per process.
+(set-default-font "Hack 9")
+
 
 ;; Anything after this point is set via customize commands.
 ;; Not to be edited by hand.
@@ -21,9 +23,13 @@
  ;; If there is more than one, they won't work right.
  '(ag-context-lines 1)
  '(ag-executable "ag")
+ '(ag-highlight-search t)
  '(auth-sources (quote ("~/.authinfo" "~/.authinfo.gpg" "~/.netrc")))
  '(aw-dispatch-always nil)
  '(aw-dispatch-when-more-than 1)
+ '(aw-keys
+   (quote
+    (97 115 100 102 103 104 106 107 108 114 117 101 105 118 110 99 111)))
  '(custom-safe-themes
    (quote
     ("3ddfde8b6afe9a72749b73b021ffd5a837f6b9d5c638f7c16d81ec9d346d899f" default)))
@@ -73,10 +79,13 @@
       (derived-mode-p
        (quote dired-mode))
       font-lock-function-name-face))))
- '(ispell-extra-args (quote ("\"--sug-mode=fast\"")))
+ '(ispell-extra-args
+   (quote
+    ("\"--sug-mode=fast\"" "\"--run-together\"" "\"--run-together-limit=10\"" "\"--run-together-min=3\"")))
  '(ispell-highlight-face (quote flyspell-incorrect))
  '(ispell-program-name "aspell")
  '(js-indent-level 2)
+ '(js2-highlight-level 3)
  '(json-reformat:indent-width 2)
  '(magit-diff-refine-hunk t)
  '(magithub-clone-default-directory nil)
@@ -84,6 +93,8 @@
  '(markdown-command "/usr/local/bin/pandoc --from=markdown --to=html")
  '(org-agenda-window-setup (quote other-window))
  '(org-drawers (quote ("PROPERTIES" "CLOCK" "LOGBOOK" "RESULTS" "MORE")))
+ '(org-jira-use-status-as-todo t)
+ '(org-jira-working-dir "~/work/org-jira")
  '(org-priority-faces (quote ((67 . "firebrick4") (65 . "cyan"))))
  '(org-src-window-setup (quote other-frame))
  '(org-todo-keyword-faces
@@ -102,25 +113,34 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (ox-jira js2-refactor docker protobuf-mode docker-compose-mode nodejs-repl python-mode ruby-mode rust-mode browse-kill-ring magithub highline crosshairs groovy-mode magit-todos helm-org-rifle gradle-mode helm helm-core helm-descbinds helm-describe-modes helm-dired-recent-dirs helm-flymake helm-flyspell helm-fuzzy-find helm-ls-git helm-ag lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode color-theme)))
+    (hide-lines org-jira haskell-mode browse-at-remote github-review nginx-mode ox-gfm ox-pandoc key-chord flymake-json pretty-mode-plus pretty-mode treemacs treemacs-icons-dired treemacs-magit dired-filter dired-sidebar rainbow-delimiters graphviz-dot-mode rjsx-mode yasnippet-snippets typescript-mode recently ox-jira js2-refactor docker protobuf-mode docker-compose-mode nodejs-repl python-mode ruby-mode rust-mode browse-kill-ring magithub highline crosshairs groovy-mode magit-todos helm-org-rifle gradle-mode helm helm-core helm-descbinds helm-describe-modes helm-dired-recent-dirs helm-flymake helm-flyspell helm-fuzzy-find helm-ls-git helm-ag lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode color-theme)))
  '(py-indent-offset 2)
  '(py-split-window-on-execute t)
  '(pylint-command "/Users/dcheryasov/work/venvs/svc-scripts/bin/prospector")
  '(pylint-options (quote ("--output-format=emacs")))
  '(sentence-end-double-space nil)
  '(show-trailing-whitespace t)
- '(venv-location "/home/dmitry/work/venvs/"))
+ '(venv-location "/home/dmitry/work/venvs/")
+ '(yas-expand-only-for-last-commands (quote (self-insert-command))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "grey16" :foreground "gainsboro" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 100 :width normal :foundry "nil" :family "DejaVu Sans Mono"))))
+ '(default ((t (:inherit nil :stipple nil :background "grey16" :foreground "#aabbaa" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal))))
  '(aw-leading-char-face ((t (:background "black" :foreground "red" :height 3.0))))
  '(column-enforce-face ((t (:background "dark slate gray"))))
  '(comint-highlight-input ((t (:foreground "sandy brown" :weight bold))))
  '(comint-highlight-prompt ((t (:foreground "green1"))))
  '(cursor ((t (:background "#fc0"))))
+ '(diff-added ((t (:inherit diff-changed :background "#003300"))))
+ '(diff-file-header ((t (:background "grey40" :weight bold))))
+ '(diff-function ((t (:inherit font-lock-function-name-face))))
+ '(diff-header ((t (:background "grey30"))))
+ '(diff-refine-added ((t (:inherit diff-refine-changed :background "#006600"))))
+ '(diff-refine-changed ((t (:background "#555500"))))
+ '(diff-refine-removed ((t (:inherit diff-refine-changed :background "#770000"))))
+ '(diff-removed ((t (:inherit diff-changed :background "#550000"))))
  '(ediff-even-diff-A ((t (:background "purple4"))))
  '(ediff-even-diff-B ((t (:background "DarkSeaGreen4"))))
  '(ediff-odd-diff-A ((t (:background "CadetBlue4"))))
@@ -137,7 +157,7 @@
  '(flymake-infoline ((((class color) (background dark)) (:background "DarkRed"))))
  '(flyspell-duplicate ((t (:underline (:color "cornflower blue" :style wave)))))
  '(flyspell-incorrect ((t (:underline (:color "yellow" :style wave)))))
- '(font-lock-comment-face ((t (:foreground "IndianRed1" :slant normal))))
+ '(font-lock-comment-face ((t (:foreground "light coral" :slant normal))))
  '(font-lock-doc-face ((t (:foreground "salmon"))))
  '(font-lock-fic-author-face ((((class color)) (:foreground "yellow"))))
  '(font-lock-fic-face ((((class color)) (:background "magenta3" :foreground "yellow" :weight bold))))
@@ -159,14 +179,18 @@
  '(ido-first-match ((t (:foreground "salmon" :weight bold))))
  '(ido-only-match ((((class color)) (:foreground "SpringGreen"))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "orange"))))
- '(js2-error ((t (:foreground "orange red"))))
+ '(js2-error ((t (:background "orange red" :foreground "yellow"))))
  '(js2-external-variable ((t (:foreground "violet"))))
  '(js2-function-param ((t (:foreground "SeaGreen2"))))
  '(js2-object-property ((t (:inherit font-lock-variable-name-face))))
  '(line-number ((t (:inherit (linum shadow default)))))
  '(linum ((t (:inherit (shadow default) :background "gray20" :foreground "yellow4"))))
  '(magit-blame-heading ((t (:background "grey25" :foreground "deep sky blue"))))
+ '(magit-diff-added ((t (:background "#004400" :foreground "#ddffdd"))))
+ '(magit-diff-added-highlight ((t (:background "#006600" :foreground "#cceecc"))))
  '(magit-diff-file-heading ((t (:foreground "turquoise2" :weight bold))))
+ '(magit-diff-removed ((t (:background "#330000" :foreground "#ffdddd"))))
+ '(magit-diff-removed-highlight ((t (:background "#441111" :foreground "#eecccc"))))
  '(magit-hash ((t (:foreground "chartreuse3"))))
  '(magit-head ((t (:foreground "orange"))))
  '(magit-section-heading-selection ((t (:background "dark slate gray"))))
@@ -176,17 +200,29 @@
  '(magithub-notification-reason ((t (:inherit magit-header-line))))
  '(markdown-code-face ((t (:foreground "cyan2"))))
  '(markdown-markup-face ((t (:foreground "green3" :slant normal :weight normal))))
+ '(match ((t (:background "DodgerBlue4"))))
  '(org-checkbox ((t (:inherit org-date :underline nil))))
  '(org-level-1 ((t (:foreground "PaleTurquoise1" :overline t :height 1.5 :family "DejaVu Sans"))))
  '(org-level-2 ((t (:inherit outline-2 :overline t :height 1.1))))
  '(org-tag ((t (:box (:line-width 1 :color "grey50" :style released-button)))))
  '(org-todo ((t (:foreground "Pink" :inverse-video t :weight bold))))
+ '(org-verbatim ((t (:foreground "deep sky blue"))))
  '(outline-1 ((t (:foreground "Cyan2"))))
  '(outline-2 ((t (:foreground "pale green"))))
  '(outline-3 ((t (:foreground "khaki"))))
  '(outline-4 ((t (:foreground "burlywood"))))
  '(package-status-dependency ((t (:inherit font-lock-function-name-face))))
  '(package-status-installed ((t (:inherit font-lock-string-face))))
+ '(rainbow-delimiters-depth-1-face ((t (:inherit rainbow-delimiters-base-face :foreground "grey128"))))
+ '(rainbow-delimiters-depth-2-face ((t (:inherit rainbow-delimiters-base-face :foreground "goldenrod"))))
+ '(rainbow-delimiters-depth-3-face ((t (:inherit rainbow-delimiters-base-face :foreground "dark turquoise"))))
+ '(rainbow-delimiters-depth-4-face ((t (:inherit rainbow-delimiters-base-face :foreground "green yellow"))))
+ '(rainbow-delimiters-depth-5-face ((t (:inherit rainbow-delimiters-base-face :foreground "salmon"))))
+ '(rainbow-delimiters-depth-6-face ((t (:inherit rainbow-delimiters-base-face :foreground "SteelBlue1"))))
+ '(rainbow-delimiters-depth-7-face ((t (:inherit rainbow-delimiters-base-face :foreground "DarkOrange1"))))
+ '(rainbow-delimiters-depth-8-face ((t (:inherit rainbow-delimiters-base-face :foreground "plum"))))
+ '(rainbow-delimiters-depth-9-face ((t (:inherit rainbow-delimiters-base-face :foreground "white smoke"))))
+ '(rainbow-delimiters-unmatched-face ((t (:inherit rainbow-delimiters-base-face :foreground "orange red"))))
  '(sh-heredoc ((t (:foreground "aquamarine2" :weight bold))))
  '(sh-quoted-exec ((t (:foreground "deep sky blue"))))
  '(show-paren-match ((t (:background "sienna4"))))
