@@ -2,7 +2,7 @@
 
 ; default font
 ; -unknown-DejaVu Sans Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1
-(set-default-font "-unknown-DejaVu Sans Mono-normal-normal-normal-*-*-90-*-*-m-0-iso10646-1")
+(set-default-font "Hack 9")
 
 ; use only spaces and no tabs
 (setq-default indent-tabs-mode nil)
