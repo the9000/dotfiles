@@ -1,0 +1,3 @@
+# Opens given file in Emacs.
+#!/bin/sh
+emacsclient -n "$@"

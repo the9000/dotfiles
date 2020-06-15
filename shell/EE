@@ -1,0 +1,3 @@
+# Opens given file in a terminal Emacs window.
+#!/bin/sh
+emacsclient -nw "$1"
