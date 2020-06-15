@@ -29,9 +29,9 @@ function _notify_by_status() {
     local command="$*"
     if [ "${status}" -eq 0 ]; then
         local message="Completed ${time_clause}."
-        local icon="up"
+        local icon="dialog-ok"
     else
-        local message="Failed with code $status ${time_clause}."
+        local message="<b>Failed</b> ${time_clause}.\nExit code $status."
         local icon="error"
     fi
 
