@@ -15,5 +15,5 @@
                                        "clearTimeout" "setInterval" "clearInterval" "location" "__dirname" "console" "JSON"))
 
 
-(my-turn-mode 'js2-mode (list 'hs-minor-mode 'highlight-symbol-mode))
-(my-turn-mode 'json-mode (list 'hs-minor-mode 'highlight-symbol-mode))
+(my-enable-modes js2-mode (hs-minor-mode highlight-symbol-mode))
+(my-enable-modes json-mode (hs-minor-mode highlight-symbol-mode))
