@@ -1,0 +1,8 @@
+#!/bin/sh
+
+function set_npm_token() {
+    [ -f  ~/.npmrc ] || echo "Cannot find  ~/.npmrc"
+    local token=$(cat ~/.npmrc | awk 'match($0, /_authToken=(.*)/, got) { print got[1] } ')
+    [ "${token}" ] || echo "No token in  ~/.npmrc"
+    export NPM_TOKEN="${token}"
+}
