@@ -10,7 +10,7 @@
 
 ;; Default font setting is per frame, so it cannot easily live in .emacs.d/
 ;; which runs once per process.
-(set-default-font "Hack 9")
+(set-frame-font "Hack 9")
 
 
 ;; Anything after this point is set via customize commands.
@@ -93,8 +93,8 @@
  '(markdown-command "/usr/local/bin/pandoc --from=markdown --to=html")
  '(org-agenda-window-setup (quote other-window))
  '(org-drawers (quote ("PROPERTIES" "CLOCK" "LOGBOOK" "RESULTS" "MORE")))
- '(org-jira-use-status-as-todo t)
- '(org-jira-working-dir "~/work/org-jira")
+ '(org-ellipsis " ▼")
+ '(org-pretty-entities nil)
  '(org-priority-faces (quote ((67 . "firebrick4") (65 . "cyan"))))
  '(org-src-window-setup (quote other-frame))
  '(org-todo-keyword-faces
@@ -113,14 +113,16 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (markdown-toc hide-lines org-jira haskell-mode browse-at-remote github-review nginx-mode ox-gfm ox-pandoc key-chord flymake-json pretty-mode-plus pretty-mode treemacs treemacs-icons-dired treemacs-magit dired-filter dired-sidebar rainbow-delimiters graphviz-dot-mode rjsx-mode yasnippet-snippets typescript-mode recently ox-jira js2-refactor docker protobuf-mode docker-compose-mode nodejs-repl python-mode ruby-mode rust-mode browse-kill-ring magithub highline crosshairs groovy-mode magit-todos helm-org-rifle gradle-mode helm helm-core helm-descbinds helm-describe-modes helm-dired-recent-dirs helm-flymake helm-flyspell helm-fuzzy-find helm-ls-git helm-ag lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode color-theme)))
+    (ts-comint typescript-mode recently sass-mode ox-jira js2-refactor docker protobuf-mode docker-compose-mode nodejs-repl python-mode ruby-mode rust-mode browse-kill-ring magithub highline crosshairs groovy-mode magit-todos helm-org-rifle gradle-mode helm helm-core helm-descbinds helm-describe-modes helm-dired-recent-dirs helm-flymake helm-flyspell helm-fuzzy-find helm-ls-git helm-ag lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode color-theme)))
  '(py-indent-offset 2)
  '(py-split-window-on-execute t)
  '(pylint-command "/Users/dcheryasov/work/venvs/svc-scripts/bin/prospector")
  '(pylint-options (quote ("--output-format=emacs")))
  '(sentence-end-double-space nil)
  '(show-trailing-whitespace t)
- '(venv-location "/home/dmitry/work/venvs/")
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-css-indent-offset 2)
+ '(web-mode-markup-indent-offset 2)
  '(yas-expand-only-for-last-commands (quote (self-insert-command))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -180,6 +182,7 @@
  '(ido-only-match ((((class color)) (:foreground "SpringGreen"))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "orange"))))
  '(js2-error ((t (:background "orange red" :foreground "yellow"))))
+ '(italic ((t (:slant italic))))
  '(js2-external-variable ((t (:foreground "violet"))))
  '(js2-function-param ((t (:foreground "SeaGreen2"))))
  '(js2-object-property ((t (:inherit font-lock-variable-name-face))))
@@ -202,6 +205,7 @@
  '(markdown-markup-face ((t (:foreground "green3" :slant normal :weight normal))))
  '(match ((t (:background "DodgerBlue4"))))
  '(org-checkbox ((t (:inherit org-date :underline nil))))
+ '(org-ellipsis ((t nil)))
  '(org-level-1 ((t (:foreground "PaleTurquoise1" :overline t :height 1.5 :family "DejaVu Sans"))))
  '(org-level-2 ((t (:inherit outline-2 :overline t :height 1.1))))
  '(org-tag ((t (:box (:line-width 1 :color "grey50" :style released-button)))))
