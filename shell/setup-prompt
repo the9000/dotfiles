@@ -34,18 +34,16 @@ p_host() {
     local special_fg=$(hl_color 148 'cyan')
     local bg=$(hl_color 22 'blue') # background
     #
-    local fg
+    local fg=${normal_fg}
     local underline=''
     local underline_off_code=''
     local host_part="" # By default, do not show hostname locally.
     if [ -n "$SSH_CLIENT" ]; then
-        host_part="👉 $(hostname | head -c 7)"
-    fi
-    if [ -n "$SSH_CLIENT" ]; then
+        host_part=" 👉 $(hostname | head -c 7)"
         underline='underline'
         underline_off_code="$(pcolor no_underline)"
     fi
-    printf "$(pcolor $fg on $bg $underline) ${host_part}${underline_off_code}"
+    printf "$(pcolor $fg on $bg $underline)${host_part}${underline_off_code}"
 }
 
 p_pwd_git() {
@@ -86,7 +84,7 @@ show_git_pwd() {
     local git_toplevel=$(git rev-parse --show-toplevel 2> /dev/null)
     if [ -n "${git_toplevel}" ]; then
         # dirs
-        local non_git_prefix=$(cut_path_to_home $(dirname "$git_toplevel")"/")
+        local non_git_prefix=$(dirname "$git_toplevel")"/"
         local worktree_path=${PWD#${non_git_prefix}}
         # branch + status.
         # NOTE: depends on `head` and `cut` when in headless mode.
@@ -103,7 +101,7 @@ show_git_pwd() {
             fi
         fi
         # final output
-        printf "${nongit_attrs}${non_git_prefix}${git_attrs}${worktree_path}"
+        printf "${nongit_attrs}$(cut_path_to_home ${non_git_prefix})${git_attrs}${worktree_path}"
         printf "${push_attrs} @ ${branch_attrs}${branch}"
     else
         # git did not work. show a regular path
