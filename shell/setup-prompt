@@ -88,7 +88,7 @@ show_git_pwd() {
     local git_toplevel=$(git rev-parse --show-toplevel 2> /dev/null)
     if [ -n "${git_toplevel}" ]; then
         # dirs
-        local non_git_prefix=$(dirname "$git_toplevel")"/"
+        local non_git_prefix=$(cut_path_to_home $(dirname "$git_toplevel")"/")
         local worktree_path=${PWD#${non_git_prefix}}
         # branch + status.
         # NOTE: depends on `head` and `cut` when in headless mode.
@@ -109,7 +109,7 @@ show_git_pwd() {
         printf "${push_attrs} @ ${branch_attrs}${branch}"
     else
         # git did not work. show a regular path
-        printf "${nongit_attrs}${PWD}"
+        printf "${nongit_attrs}$(cut_path_to_home ${PWD})"
     fi
 }
 
@@ -211,7 +211,7 @@ if [ $(tput colors) -ge 8 ]; then
    C_ACCESS="\[\033[1;37m\]" # white by default
    C_NOCOLOR="\[\033[0m\]"
    if [ -n "$SSH_CLIENT" ]; then
-     C_ACCESS="\[\033[1;32m\]" # green is SSH
+     C_ACCESS="👉 \[\033[1;32m\]" # green is SSH
    else
      C_ACCESS="\[\033[0;37m\]" # gray is non-ssh
    fi
@@ -241,7 +241,11 @@ else
 fi
 }
 
-host_part=$(hostname | head -c 7)
+if [ -n "$SSH_CLIENT" ]; then
+    host_part=$(hostname | head -c 7)
+else
+    host_part = ""  # Do not show hostname locally.
+fi
 time_part='$(date +"%H:%M")'
 prompt_colors
 
