@@ -37,11 +37,9 @@ p_host() {
     local fg
     local underline=''
     local underline_off_code=''
-    host_part=$(hostname)
-    if [[ ${host_part} =~ corp\.google\.com ]]; then
-        fg=${special_fg}
-    else
-        fg=${normal_fg}
+    local host_part="" # By default, do not show hostname locally.
+    if [ -n "$SSH_CLIENT" ]; then
+        host_part="👉 $(hostname | head -c 7)"
     fi
     if [ -n "$SSH_CLIENT" ]; then
         underline='underline'
@@ -241,15 +239,7 @@ else
 fi
 }
 
-if [ -n "$SSH_CLIENT" ]; then
-    host_part="👉 $(hostname | head -c 7)"
-else
-    host_part = ""  # Do not show hostname locally.
-fi
-time_part='$(date +"%H:%M")'
 prompt_colors
 
 # example:
 PS1="$(pcolor none)$(p_exitcode)$(p_time) $(p_host):$(p_pwd_git) $(pcolor none)\n\$ "
-
-unset host_part time_part
