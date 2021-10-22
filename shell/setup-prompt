@@ -211,7 +211,7 @@ if [ $(tput colors) -ge 8 ]; then
    C_ACCESS="\[\033[1;37m\]" # white by default
    C_NOCOLOR="\[\033[0m\]"
    if [ -n "$SSH_CLIENT" ]; then
-     C_ACCESS="👉 \[\033[1;32m\]" # green is SSH
+     C_ACCESS="\[\033[1;32m\]" # green is SSH
    else
      C_ACCESS="\[\033[0;37m\]" # gray is non-ssh
    fi
@@ -242,7 +242,7 @@ fi
 }
 
 if [ -n "$SSH_CLIENT" ]; then
-    host_part=$(hostname | head -c 7)
+    host_part="👉 $(hostname | head -c 7)"
 else
     host_part = ""  # Do not show hostname locally.
 fi
