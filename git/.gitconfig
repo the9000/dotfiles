@@ -1,6 +1,9 @@
+[include]
+    path = ~/.gitconfig.id
 [user]
     name = Dmitry Cheryasov
-    email = dmitry@clicktherapeutics.com
+# Email is in include.
+#    email = dmitry@clicktherapeutics.com
 [color]
     filemode = false
     diff = auto
