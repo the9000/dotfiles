@@ -10,7 +10,7 @@
 
 ;; Default font setting is per frame, so it cannot easily live in .emacs.d/
 ;; which runs once per process.
-(set-frame-font "Hack 9")
+(set-frame-font "DejaVu Sans Mono 9")
 
 
 ;; Anything after this point is set via customize commands.
@@ -24,40 +24,36 @@
  '(ag-context-lines 1)
  '(ag-executable "ag")
  '(ag-highlight-search t)
- '(auth-sources (quote ("~/.authinfo" "~/.authinfo.gpg" "~/.netrc")))
+ '(auth-sources '("~/.authinfo" "~/.authinfo.gpg" "~/.netrc"))
  '(aw-dispatch-always nil)
  '(aw-dispatch-when-more-than 1)
  '(aw-keys
-   (quote
-    (97 115 100 102 103 104 106 107 108 114 117 101 105 118 110 99 111)))
+   '(97 115 100 102 103 104 106 107 108 114 117 101 105 118 110 99 111))
  '(custom-safe-themes
-   (quote
-    ("3ddfde8b6afe9a72749b73b021ffd5a837f6b9d5c638f7c16d81ec9d346d899f" default)))
- '(fic-highlighted-words (quote ("FIXME" "TODO" "REDFLAG" "XXX" "NOTE")))
+   '("3ddfde8b6afe9a72749b73b021ffd5a837f6b9d5c638f7c16d81ec9d346d899f" default))
+ '(fic-highlighted-words '("FIXME" "TODO" "REDFLAG" "XXX" "NOTE"))
  '(fixmee-notice-regexp
    "\\(@@@+\\|\\_<\\(?:[Tt][Oo][Dd][Oo]+\\|[Ff][Ii][Xx][Mm][Ee]+\\|XXX+\\|YYY+\\)\\)\\(?:[/:?!. 	
 ]+\\|-+\\(?:\\s-\\|[
 ]\\)\\|\\_>\\)")
- '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
- '(flycheck-navigation-minimum-level (quote warning))
+ '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
+ '(flycheck-navigation-minimum-level 'warning)
  '(flycheck-python-pylint-executable "/Users/dcheryasov/work/venvs/svc-scripts/bin/pylint")
- '(haskell-mode-hook (quote (turn-on-haskell-indentation)))
+ '(haskell-mode-hook '(turn-on-haskell-indentation))
  '(highlight-indent-guides-auto-even-face-perc 0)
  '(highlight-symbol-idle-delay 0.75)
  '(hl-todo-keyword-faces
-   (quote
-    (("TODO" . font-lock-type-face)
+   '(("TODO" . font-lock-type-face)
      ("NEXT" . "burlywood1")
      ("FAIL" . "cyan")
      ("NOTE" . font-lock-string-face)
      ("HACK" . "green")
      ("FIXME" . "yellow")
      ("XXX" . "yellow")
-     ("DONE" . font-lock-string-face))))
- '(ibuffer-filter-group-name-face (quote font-lock-function-name-face))
+     ("DONE" . font-lock-string-face)))
+ '(ibuffer-filter-group-name-face 'font-lock-function-name-face)
  '(ibuffer-fontification-alist
-   (quote
-    ((10 buffer-read-only font-lock-constant-face)
+   '((10 buffer-read-only font-lock-constant-face)
      (15
       (and buffer-file-name
            (string-match ibuffer-compressed-file-name-regexp buffer-file-name))
@@ -76,13 +72,11 @@
       (memq major-mode ibuffer-help-buffer-modes)
       font-lock-string-face)
      (35
-      (derived-mode-p
-       (quote dired-mode))
-      font-lock-function-name-face))))
+      (derived-mode-p 'dired-mode)
+      font-lock-function-name-face)))
  '(ispell-extra-args
-   (quote
-    ("\"--sug-mode=fast\"" "\"--run-together\"" "\"--run-together-limit=10\"" "\"--run-together-min=3\"")))
- '(ispell-highlight-face (quote flyspell-incorrect))
+   '("\"--sug-mode=fast\"" "\"--run-together\"" "\"--run-together-limit=10\"" "\"--run-together-min=3\""))
+ '(ispell-highlight-face 'flyspell-incorrect)
  '(ispell-program-name "aspell")
  '(js-indent-level 2)
  '(js2-highlight-level 3)
@@ -91,39 +85,34 @@
  '(magithub-clone-default-directory nil)
  '(magithub-dir "/Users/dcheryasov/.cache/magithub")
  '(markdown-command "/usr/local/bin/pandoc --from=markdown --to=html")
- '(org-agenda-window-setup (quote other-window))
- '(org-drawers (quote ("PROPERTIES" "CLOCK" "LOGBOOK" "RESULTS" "MORE")))
+ '(org-agenda-window-setup 'other-window)
+ '(org-drawers '("PROPERTIES" "CLOCK" "LOGBOOK" "RESULTS" "MORE"))
  '(org-ellipsis " ▼")
  '(org-pretty-entities nil)
- '(org-priority-faces (quote ((67 . "firebrick4") (65 . "cyan"))))
- '(org-src-window-setup (quote other-frame))
+ '(org-priority-faces '((67 . "firebrick4") (65 . "cyan")))
+ '(org-src-window-setup 'other-frame)
  '(org-todo-keyword-faces
-   (quote
-    (("WAIT" . "gray")
+   '(("WAIT" . "gray")
      ("WIP" . "yellow")
      ("CANCEL" . "cyan3")
-     ("FAIL" . "MediumOrchid3"))))
+     ("FAIL" . "MediumOrchid3")))
  '(org-todo-keywords
-   (quote
-    ((sequence "TODO(t)" "WIP(p)" "WAIT(w)" "|" "CANCEL(c)" "DONE(d)" "FAIL(f)"))))
+   '((sequence "TODO(t)" "WIP(p)" "WAIT(w)" "|" "CANCEL(c)" "DONE(d)" "FAIL(f)")))
  '(package-archives
-   (quote
-    (("marmalade" . "https://marmalade-repo.org/packages/")
-     ("melpa" . "http://melpa.milkbox.net/packages/")
-     ("gnu" . "http://elpa.gnu.org/packages/"))))
+   '(("melpa" . "http://melpa.org/packages/")
+     ("gnu" . "http://elpa.gnu.org/packages/")))
  '(package-selected-packages
-   (quote
-    (ts-comint typescript-mode recently sass-mode ox-jira js2-refactor docker protobuf-mode docker-compose-mode nodejs-repl python-mode ruby-mode rust-mode browse-kill-ring magithub highline crosshairs groovy-mode magit-todos helm-org-rifle gradle-mode helm helm-core helm-descbinds helm-describe-modes helm-dired-recent-dirs helm-flymake helm-flyspell helm-fuzzy-find helm-ls-git helm-ag lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode color-theme)))
+   '(company projectile tide eglot eldoc docker-cli docker-tramp flycheck-rust flyspell-correct-popup rjsx-mode ts-comint typescript-mode recently sass-mode ox-jira js2-refactor docker protobuf-mode docker-compose-mode nodejs-repl python-mode ruby-mode rust-mode browse-kill-ring magithub highline crosshairs groovy-mode magit-todos helm-org-rifle gradle-mode helm helm-core helm-descbinds helm-describe-modes helm-dired-recent-dirs helm-flymake helm-flyspell helm-fuzzy-find helm-ls-git helm-ag lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode))
  '(py-indent-offset 2)
  '(py-split-window-on-execute t)
  '(pylint-command "/Users/dcheryasov/work/venvs/svc-scripts/bin/prospector")
- '(pylint-options (quote ("--output-format=emacs")))
+ '(pylint-options '("--output-format=emacs"))
  '(sentence-end-double-space nil)
  '(show-trailing-whitespace t)
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
  '(web-mode-markup-indent-offset 2)
- '(yas-expand-only-for-last-commands (quote (self-insert-command))))
+ '(yas-expand-only-for-last-commands '(self-insert-command)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -181,8 +170,8 @@
  '(ido-first-match ((t (:foreground "salmon" :weight bold))))
  '(ido-only-match ((((class color)) (:foreground "SpringGreen"))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "orange"))))
- '(js2-error ((t (:background "orange red" :foreground "yellow"))))
  '(italic ((t (:slant italic))))
+ '(js2-error ((t (:background "orange red" :foreground "yellow"))))
  '(js2-external-variable ((t (:foreground "violet"))))
  '(js2-function-param ((t (:foreground "SeaGreen2"))))
  '(js2-object-property ((t (:inherit font-lock-variable-name-face))))
