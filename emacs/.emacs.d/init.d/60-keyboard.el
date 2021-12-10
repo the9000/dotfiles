@@ -82,6 +82,8 @@
     )
   )
 
+(if (fboundp 'treemacs) (global-set-key (kbd "C-c t") 'treemacs))
+
 ;; \\
 
 ; Outline mode keys rebound more nicely
