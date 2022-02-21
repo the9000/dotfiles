@@ -36,6 +36,7 @@
    "\\(@@@+\\|\\_<\\(?:[Tt][Oo][Dd][Oo]+\\|[Ff][Ii][Xx][Mm][Ee]+\\|XXX+\\|YYY+\\)\\)\\(?:[/:?!. 	
 ]+\\|-+\\(?:\\s-\\|[
 ]\\)\\|\\_>\\)")
+ '(flycheck-checker-error-threshold 1000)
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
  '(flycheck-navigation-minimum-level 'warning)
  '(flycheck-python-pylint-executable "/Users/dcheryasov/work/venvs/svc-scripts/bin/pylint")
@@ -82,6 +83,9 @@
  '(js2-highlight-level 3)
  '(json-reformat:indent-width 2)
  '(magit-diff-refine-hunk t)
+ '(magit-log-section-commit-count 30)
+ '(magit-status-goto-file-position t)
+ '(magit-status-margin '(nil age magit-log-margin-width t 18))
  '(magithub-clone-default-directory nil)
  '(magithub-dir "/Users/dcheryasov/.cache/magithub")
  '(markdown-command "/usr/local/bin/pandoc --from=markdown --to=html")
@@ -102,7 +106,7 @@
    '(("melpa" . "http://melpa.org/packages/")
      ("gnu" . "http://elpa.gnu.org/packages/")))
  '(package-selected-packages
-   '(treemacs dir-treeview company projectile tide eglot eldoc docker-cli docker-tramp flycheck-rust flyspell-correct-popup rjsx-mode ts-comint typescript-mode recently sass-mode ox-jira js2-refactor docker protobuf-mode docker-compose-mode nodejs-repl python-mode ruby-mode rust-mode browse-kill-ring magithub highline crosshairs groovy-mode magit-todos helm-org-rifle gradle-mode helm helm-core helm-descbinds helm-describe-modes helm-dired-recent-dirs helm-flymake helm-flyspell helm-fuzzy-find helm-ls-git helm-ag lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode))
+   '(wgrep wgrep-ag treemacs dir-treeview company projectile tide eglot eldoc docker-cli docker-tramp flycheck-rust flyspell-correct-popup rjsx-mode ts-comint typescript-mode recently sass-mode ox-jira js2-refactor docker protobuf-mode docker-compose-mode nodejs-repl python-mode ruby-mode rust-mode browse-kill-ring magithub highline crosshairs groovy-mode magit-todos helm-org-rifle gradle-mode helm helm-core helm-descbinds helm-describe-modes helm-dired-recent-dirs helm-flymake helm-flyspell helm-fuzzy-find helm-ls-git helm-ag lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode))
  '(py-indent-offset 2)
  '(py-split-window-on-execute t)
  '(pylint-command "/Users/dcheryasov/work/venvs/svc-scripts/bin/prospector")
