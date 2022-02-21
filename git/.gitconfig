@@ -22,25 +22,24 @@
     lg = log --graph --pretty=format:'%C(green)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset' --abbrev-commit --date=relative
     lga = log --graph --pretty=format:'%C(green)%h%Creset -%C(cyan)%d%Creset %s %Cgreen(%cr) %C(yellow)<%an>%Creset' --abbrev-commit --date=relative --branches
     lg5 = "!git lg -n 5"
-    lgom = "!git lg origin/master^1.." # Log commits up until and including origin/master.
+    lgb = "!git lg origin/HEAD^1.." # Log branch's commits up until a merge.
     st = status
     fixup = !sh -c 'git commit -a -m \"fixup! $(git log -1 --format='%s' $@)\"' -
     squ = !sh -c 'git commit -a -m \"squash! $(git log -1 --format='%s' $@)\"' -
     ri = rebase --interactive
     rc = rebase --continue
-    push-review = push origin HEAD:refs/for/master
     last = log -p -n 1
     last5 = log -p -n 5
     lst = log -p -n 1 --name-only
     lst5 = log -p -n 5 --name-only
     unadd = reset
     unstage = rm --cached
-    prom = pull --rebase origin master
     pwd = rev-parse --show-toplevel
     cp = cherry-pick
     cpx = cherry-pick -x
     shon = show --oneline --name-only
     feap = fetch --all --prune
+    fo = fetch origin
     wt = worktree
     # WTB: worktree branch.
     # git wtb foobar  # creates branch foobar off master in worktree ../foobar
@@ -70,16 +69,17 @@
 
 [color "status"]
     branch = bold
-    added = green bold
-    changed = cyan bold
+    added = brightgreen bold
+    changed = brightcyan 
     untracked = yellow dim
     # color of conflicts
-    unmerged = magenta bold
+    unmerged = brightmagenta bold
 
 [push]
 	default = current
 [diff]
 	tool = meld
+	algorithm = patience
 [merge]
 	tool = meld
 [cola]
