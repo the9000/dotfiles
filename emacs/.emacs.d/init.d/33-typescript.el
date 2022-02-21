@@ -18,12 +18,15 @@
                                   flycheck-mode
                                   highlight-symbol-mode
                                   company-mode))
-      (add-hook 'typescript-mode-hook
-                (lambda ()
-                  (progn
-                    (define-key typescript-mode-map (kbd "C-c d") 'tide-documentation-at-point)
-                    (define-key typescript-mode-map (kbd "C-c r") 'tide-references)
-                    )))
+      ;; Some handy keys.
+      (add-hook
+       'tide-mode-hook
+       (lambda ()
+         (progn
+           (define-key typescript-mode-map (kbd "C-c d") #'tide-documentation-at-point)
+           (define-key typescript-mode-map (kbd "C-c r") #'tide-references)
+           (define-key typescript-mode-map (kbd "C-c n") #'tide-rename-symbol)
+           )))
       ;; auto-mode-alist only assigns one mode. We want a second on top.
       (add-hook
        'find-file-hook
@@ -33,6 +36,7 @@
              (progn
                (interactive)
                (message "Setting up Tide in %s" buffer-file-name)
+               (typescript-mode)
                (tide-mode +1)
                (tide-setup)
                (tide-hl-identifier-mode +1)
