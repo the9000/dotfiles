@@ -25,3 +25,6 @@
 
 ;; Always show matching pairs.
 (show-paren-mode 1)
+
+;; Keep track of recent files.
+(recentf-mode +1)
