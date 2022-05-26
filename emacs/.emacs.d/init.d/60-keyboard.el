@@ -18,7 +18,7 @@
 (global-set-key (kbd "<C-prior>") 'previous-multiframe-window)
 (global-set-key (kbd "<C-next>") 'next-multiframe-window)
 
-(global-set-key (kbd "C-j") 'join-line)
+(global-set-key (kbd "C-S-j") 'join-line)
 (global-set-key (kbd "C-c j") 'join-line)
 
 
