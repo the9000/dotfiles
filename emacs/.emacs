@@ -28,6 +28,7 @@
  '(aw-keys '(97 115 100 102 106 107 108 103 104 101 114 117 105))
  '(custom-safe-themes
    '("3ddfde8b6afe9a72749b73b021ffd5a837f6b9d5c638f7c16d81ec9d346d899f" default))
+ '(display-line-numbers-major-tick 10)
  '(fic-highlighted-words '("FIXME" "TODO" "REDFLAG" "XXX" "NOTE"))
  '(fixmee-notice-regexp
    "\\(@@@+\\|\\_<\\(?:[Tt][Oo][Dd][Oo]+\\|[Ff][Ii][Xx][Mm][Ee]+\\|XXX+\\|YYY+\\)\\)\\(?:[/:?!. 	
@@ -35,9 +36,11 @@
 ]\\)\\|\\_>\\)")
  '(flycheck-checker-error-threshold 1000)
  '(flycheck-color-mode-line-face-to-color 'mode-line-buffer-id)
+ '(flycheck-disabled-checkers '(python-mypy))
  '(flycheck-navigation-minimum-level 'warning)
- '(flycheck-python-pylint-executable "/Users/dcheryasov/work/venvs/svc-scripts/bin/pylint")
+ '(flycheck-python-pylint-executable nil)
  '(haskell-mode-hook '(turn-on-haskell-indentation))
+ '(help-window-select t)
  '(highlight-indent-guides-auto-even-face-perc 0)
  '(highlight-symbol-idle-delay 0.75)
  '(hl-todo-keyword-faces
@@ -79,12 +82,15 @@
  '(js-indent-level 2)
  '(json-reformat:indent-width 2)
  '(line-spacing -0.05)
+ '(lsp-keymap-prefix "C-M-z")
+ '(lsp-ui-doc-header t)
+ '(lsp-ui-doc-include-signature t)
  '(magit-diff-refine-hunk t)
  '(magit-log-section-commit-count 30)
  '(magit-status-goto-file-position t)
  '(magit-status-margin '(nil age magit-log-margin-width t 18))
  '(magithub-clone-default-directory nil)
- '(magithub-dir "/Users/dcheryasov/.cache/magithub")
+ '(magithub-dir "/home/cmb/.cache/magithub")
  '(markdown-command "/usr/local/bin/pandoc --from=markdown --to=html")
  '(org-agenda-window-setup 'other-window)
  '(org-drawers '("PROPERTIES" "CLOCK" "LOGBOOK" "RESULTS" "MORE"))
@@ -103,14 +109,19 @@
    '(("melpa" . "https://melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")))
  '(package-selected-packages
-   '(lsp-ui lua-mode java-snippets js-react-redux-yasnippets yasnippet yasnippet-snippets treemacs elixir-mode clojure-mode scad-mode tramp ts-comint typescript-mode recently sass-mode ox-jira js2-refactor docker protobuf-mode docker-compose-mode nodejs-repl python-mode ruby-mode rust-mode browse-kill-ring magithub highline crosshairs groovy-mode magit-todos helm-org-rifle gradle-mode helm-descbinds helm-describe-modes helm-dired-recent-dirs lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode))
+   '(forge git-timemachine winnow fzf flx flycheck-mypy ibuffer-projectile treemacs-projectile projectile projectile-variable smart-jump dumb-jump use-package company company-ghci company-org-block company-shell company-web lsp-jedi mermaid-mode lsp-ui lua-mode java-snippets js-react-redux-yasnippets yasnippet yasnippet-snippets treemacs elixir-mode clojure-mode scad-mode tramp ts-comint typescript-mode recently sass-mode ox-jira js2-refactor docker protobuf-mode docker-compose-mode nodejs-repl python-mode ruby-mode rust-mode browse-kill-ring highline crosshairs groovy-mode magit-todos helm-org-rifle gradle-mode helm-descbinds helm-describe-modes helm-dired-recent-dirs lsp-mode lsp-python flycheck-color-mode-line json-mode htmlize ztree ensime scala-mode flycheck-kotlin kotlin-mode ibuffer-vc dockerfile-mode gitconfig-mode god-mode multi-term hl-todo popwin pytest python-docstring org origami emacsql-sqlite pylint restclient pydoc crontab-mode pip-requirements toml-mode yaml-mode jira-markup-mode highlight-symbol virtualenvwrapper ag flyspell-lazy git-commit git-gutter markdown-mode nlinum php-mode sql-indent string-inflection find-file-in-repository flycheck ace-jump-mode ace-window color-theme-modern column-enforce-mode highlight-indent-guides fixmee js2-mode magit web-mode))
  '(py-indent-offset 2)
  '(py-split-window-on-execute t)
  '(pylint-command "/Users/dcheryasov/work/venvs/svc-scripts/bin/prospector")
  '(pylint-options '("--output-format=emacs"))
+ '(safe-local-variable-values
+   '((eval column-enforce-n 120)
+     (column-enforce-n . 120)
+     (column-enforce-column . 120)))
  '(sentence-end-double-space nil)
  '(show-trailing-whitespace t)
- '(venv-location "/home/dmitry/work/venvs/")
+ '(venv-location "/home/cmb/work/venvs/")
+ '(warning-suppress-types '((comp) (comp)))
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
  '(web-mode-markup-indent-offset 2)
