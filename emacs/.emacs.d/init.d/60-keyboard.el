@@ -31,6 +31,18 @@
     (kill-buffer (current-buffer)))
 (global-set-key (kbd "C-x C-\\") 'my-kill-this-buffer)
 
+(defun my-show-current-file-name ()
+    "Show current file name as a message"
+    (interactive)
+    (message buffer-file-name))
+(global-set-key (kbd "C-x x x") 'my-show-current-file-name)
+
+(defun my-copy-current-file-name ()
+    "Show current file name as a message"
+    (interactive)
+    (kill-new buffer-file-name))
+(global-set-key (kbd "C-x x c") 'my-copy-current-file-name)
+
 
 ; M-click and C-c . try to open file at point.
 (global-set-key (kbd "<M-down-mouse-1>") 'ffap-at-mouse)
@@ -57,12 +69,17 @@
 
 (if (fboundp 'find-file-in-repository)
     (global-set-key (kbd "M-g r") 'find-file-in-repository))
+(if (fboundp 'fzf-git)
+    (global-set-key (kbd "M-g M-r") 'fzf-git))
 
 (if (fboundp 'string-inflection-all-cycle)
     (global-set-key (kbd "C-c -") 'string-inflection-all-cycle))
 
 (if (fboundp 'magit-status)
-    (global-set-key (kbd "C-x g") 'magit-status))
+    (progn
+      (global-set-key (kbd "C-x g") 'magit-status)
+      (global-set-key (kbd "C-x C-g") 'magit-blame-addition)
+      ))
 
 ;; From https://emacs.stackexchange.com/a/29961/9370.
 (defun my-flip-window ()
@@ -94,6 +111,7 @@
   (local-set-key (kbd "C-c <down>") 'show-subtree)
   (local-set-key (kbd "C-c <left>") 'hide-body)
   (local-set-key (kbd "C-c <right>") 'show-all)
+  (local-set-key (kbd "C-c <C-up>") 'outline-up-heading)
 )
 
 (add-hook 'outline-mode-hook 'my-outline-mode-key-bindings)
