@@ -1,4 +1,5 @@
 [include]
+    # This sets user.email, user.signingKey, and github-relaed values.
     path = ~/.gitconfig.id
 [user]
     name = Dmitry Cheryasov
@@ -28,6 +29,8 @@
     squ = !sh -c 'git commit -a -m \"squash! $(git log -1 --format='%s' $@)\"' -
     ri = rebase --interactive
     rc = rebase --continue
+    # ro xyz = rebase origin/xyz
+    ro = !sh -c 'git rebase origin/$1' -
     last = log -p -n 1
     last5 = log -p -n 5
     lst = log -p -n 1 --name-only
@@ -44,7 +47,7 @@
     # WTB: worktree branch.
     # git wtb foobar  # creates branch foobar off master in worktree ../foobar
     # git wtb foobar some-branch  # creates branch foobar off some-branch in worktree ../foobar
-    wtb = "!f() { local git_pwd=$(git rev-parse --show-toplevel); git worktree add -b dc-$1 ${git_pwd}.$1 ${2:-master};}; f"
+    wtb = "!f() { local git_pwd=$(git rev-parse --show-toplevel); git worktree add -b dmitry/$1 ${git_pwd}.$1 ${2:-master};}; f"
     # fo = ferch origin, analogous to pull without checking the branch out.
     fo = !sh -c 'git fetch origin $1:$1' -
     # nb = 'new branch' on top of freshly fetched master.
@@ -70,7 +73,7 @@
 [color "status"]
     branch = bold
     added = brightgreen bold
-    changed = brightcyan 
+    changed = brightcyan
     untracked = yellow dim
     # color of conflicts
     unmerged = brightmagenta bold
@@ -86,6 +89,3 @@
 	fontdiff = DejaVu Sans Mono,11,-1,5,50,0,0,0,0,0
 [branch]
 	autosetuprebase = always
-[github]
-	user = dcheryasov@grubhub.com
-	oauth-token = 6ed3856d64cea92ebb348213b9e8a2f7a845f851
