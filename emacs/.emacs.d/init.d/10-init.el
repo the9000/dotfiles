@@ -14,7 +14,7 @@
 (defun my-enable-if-present (mode-name)
   (if (boundp mode-name)
       (progn
-        (funcall mode-name)
+        (funcall mode-name t)
         (message "Calling %s" mode-name)
         )))
 
