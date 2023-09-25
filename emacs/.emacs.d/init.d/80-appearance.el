@@ -24,3 +24,6 @@
 (setq
  uniquify-buffer-name-style 'post-forward
  uniquify-separator ":")
+
+;; Remove menu bar.
+(menu-bar-mode -1)
