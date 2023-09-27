@@ -1,0 +1,14 @@
+# Intended to be sourced in e.g. ~/.profile
+# Works around a bug in VTE that breaks TERM setting
+
+# Don't try to alter settings in a tmux/screen session, though
+if [ 'screen' != ${TERM:0:6} ]
+then
+  case "$COLORTERM" in
+      Terminal|gnome-terminal|xfce4-terminal|wterm-xpm|Eterm|1)
+      # XFCE Terminal, gnome-terminal, wterm, Eterm
+      # 1 is lxterminal, konsole, yakuake, uxterm, Mac OSX terminal, putty ...
+      export TERM=xterm-256color
+  ;;
+  esac
+fi

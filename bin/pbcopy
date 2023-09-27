@@ -1,0 +1,3 @@
+#!/bin/sh
+# Copy input to X clipboard.
+xclip -selection clipboard

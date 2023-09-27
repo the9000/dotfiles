@@ -34,20 +34,16 @@ p_host() {
     local special_fg=$(hl_color 148 'cyan')
     local bg=$(hl_color 22 'blue') # background
     #
-    local fg
+    local fg=${normal_fg}
     local underline=''
     local underline_off_code=''
-    host_part=$(hostname)
-    if [[ ${host_part} =~ corp\.google\.com ]]; then
-        fg=${special_fg}
-    else
-        fg=${normal_fg}
-    fi
+    local host_part="" # By default, do not show hostname locally.
     if [ -n "$SSH_CLIENT" ]; then
+        host_part=" 👉 $(hostname | head -c 7)"
         underline='underline'
         underline_off_code="$(pcolor no_underline)"
     fi
-    printf "$(pcolor $fg on $bg $underline) ${host_part}${underline_off_code}"
+    printf "$(pcolor $fg on $bg $underline)${host_part}${underline_off_code}"
 }
 
 p_pwd_git() {
@@ -91,9 +87,10 @@ show_git_pwd() {
         local non_git_prefix=$(dirname "$git_toplevel")"/"
         local worktree_path=${PWD#${non_git_prefix}}
         # branch + status.
-        # NOTE: depends on `head` and `cut`; --symbolic-ref shows non-existent 'master'
-        local branch=$(git branch | head -n 1 | cut -c 3-)
-        branch=${branch:-"<no branch>"}
+        # NOTE: depends on `head` and `cut` when in headless mode.
+        local branch=$(git symbolic-ref --short -q HEAD || (git branch | head -n 1 | cut -c 3-))
+        # In an empty repo, there can be no branch at all!
+        branch=${branch:-'<no branch>'}
         # The branch is dirty and unpushed unless proven otherwise.
         local branch_attrs="${modified_branch_attrs}"
         local push_attrs="${modified_branch_attrs}"
@@ -240,11 +237,7 @@ else
 fi
 }
 
-host_part=$(hostname | head -c 7)
-time_part='$(date +"%H:%M")'
 prompt_colors
 
 # example:
 PS1="$(pcolor none)$(p_exitcode)$(p_time) $(p_host):$(p_pwd_git) $(pcolor none)\n\$ "
-
-unset host_part time_part

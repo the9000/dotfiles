@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "Stopping all running Docker containers."
+docker ps | awk ' { print $1 }' | grep -v CONTAINER  | xargs --no-run-if-empty docker stop

@@ -8,6 +8,12 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+# Stuff that happens on any login.
+export TZ="/usr/share/zoneinfo/$(cat $HOME/timezone)"
+
+# TODO: should go to .xprofile.
+export QT_QPA_PLATFORMTHEME=gtk2
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
@@ -16,9 +22,3 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# Execute .profile.d one-purpose files.
-if [ -d ~/.profile.d ]; then
-    for init_file in ~/.profile.d/*.sh; do
-        source ${init_file}
-    done
-fi

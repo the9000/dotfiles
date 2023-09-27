@@ -1,0 +1,21 @@
+#!/bin/bash
+
+cmdline="$*"
+
+if [ -z i"$cmdline" ]; then
+    echo "Usage: $0 <whatever command and arguments>"
+    echo "After the command has run, an OSD notification will be shown."
+    exit 1
+fi
+
+nice $cmdline
+exitcode=$?
+
+partlength=30 # first how many characters to show
+cmdpart=${cmdline:0:$partlength}
+
+if [ $exitcode -ne 0 ]; then
+    echo "$cmdpart → $exitcode" | aosd_failure &
+else
+    echo "$cmdpart" | aosd_success &
+fi

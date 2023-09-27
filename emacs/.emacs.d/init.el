@@ -24,3 +24,8 @@
   )
 )
 (load-init-dir-files (concat user-init-dir "/init.d"))
+
+;; Do not add anything here.
+
+;; (message "init.el done")
+

@@ -8,28 +8,51 @@
 # Note that PYTHONSTARTUP does *not* expand "~", so you have to put in the
 # full path to your home directory.
 
+# NOTE: if the history file was empty and now an IOError happens when it
+# is read, append this to the top:
+# _HiStOrY_V2_
+# This is OSX's libedit that feigns being readline.
+
 import atexit
 import os
-import readline
-import rlcompleter
 import sys
 
-# change autocomplete to tab
-readline.parse_and_bind("tab: complete")
 
-historyPath = os.path.expanduser("~/.pyhistory")
-
-def save_history(historyPath=historyPath):
+def setupReadlineAndHistory(history_path):
+  try:
     import readline
-    readline.write_history_file(historyPath)
+    import rlcompleter
+    import sys
+    if(sys.platform == 'darwin') and 'libedit' in readline.__doc__:
+        readline.parse_and_bind ("bind ^I rl_complete") # OSX-compatible
+    else:
+      readline.parse_and_bind("tab: complete")  # Linux-compatible
+    # prepare history saving
+    def save_history(history_path=history_path):
+        import readline
+        readline.write_history_file(history_path)
 
-if os.path.exists(historyPath):
-    readline.read_history_file(historyPath)
+    if os.path.exists(history_path):
+        readline.read_history_file(history_path)
 
-atexit.register(save_history)
+    atexit.register(save_history)
+    del readline, rlcompleter
+  except ImportError:
+    print("# readline is not available; no completion or history.")
 
-sys.ps1 = os.getenv('PYTHON_PS1', '>>> ').decode('string_escape')
-sys.ps2 = os.getenv('PYTHON_PS2', '... ').decode('string_escape')
 
-# anything not deleted (sys and os) will remain in the interpreter session
-del atexit, readline, rlcompleter, save_history, historyPath, sys
+def setupPrompt():
+  try:
+    getter = os.getenvb  # py3
+  except AttributeError:
+    getter = os.getenv  # py2
+  # TODO: handle unicode in Py3 envs.
+  sys.ps1 = getter(b'PYTHON_PS1', b'>>> ').decode('unicode_escape')
+  sys.ps2 = getter(b'PYTHON_PS2', b'... ').decode('unicode_escape')
+
+# main
+setupReadlineAndHistory(os.path.expanduser("~/.pyhistory"))
+setupPrompt()
+
+# anything not deleted will remain in the interpreter session
+del atexit, os, sys

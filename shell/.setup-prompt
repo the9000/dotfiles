@@ -1,0 +1,48 @@
+# should be sourced by shell
+
+# prompt tweaks
+function prompt_colors
+# sets C_ACCESS, C_SUPER, C_TITLE, C_NOCOLOR to esc sequences if xterm
+# else sets them to empty values
+{
+if [ $(tput colors) -ge 8 ]; then
+   C_ACCESS="\[\033[1;37m\]" # white by default
+   C_NOCOLOR="\[\033[0m\]"
+   if [ -n "$SSH_CLIENT" ]; then
+     C_ACCESS="\[\033[1;32m\]" # green is SSH
+   else
+     C_ACCESS="\[\033[0;37m\]" # gray is non-ssh
+   fi
+   if [ "$(id -u)" = "0" ]; then
+     C_USER="\[\033[1;31m\]" # red is root
+   else
+     C_USER="\[\033[1;32m\]" # green is non-root
+   fi
+   git_branch_cmd='$(git branch 2>/dev/null|grep -e ^* | tr -d "\* ")'
+   if [ "$TMUX" ]; then
+       C_TITLE='\[\e]0;\w |'${git_branch_cmd}'\a\]'
+   else
+       C_TITLE='\[\e]0;\u@\H:\w |'${git_branch_cmd}'\a\]'
+   fi
+   if [ $TERM == 'linux' ] || [ $TERM == 'cons25' ]; then 
+       # consoles don't support title
+       C_TITLE=""
+   fi
+   #export PS1="$NOCOLOR\u@$HOST_PRE\h$NOCOLOR:\W$PRE\\$ $NOCOLOR"
+   #export PS2="${PRE}> $NOCOLOR"
+else
+  # TODO: support 4-color withbold, too
+   C_NOCOLOR=""
+   C_ACCESS=""
+   C_USER=""
+   C_TITLE=""
+fi
+}
+
+host_part=$(hostname | head -c 7)
+time_part='$(date +"%H:%M")'
+prompt_colors
+PS1="${C_ACCESS}${host_part} ${time_part} ${C_USER}\\$ ${C_NOCOLOR}${C_TITLE}"
+
+unset host_part time_part
+
