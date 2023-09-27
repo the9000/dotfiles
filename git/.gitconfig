@@ -1,6 +1,6 @@
 [user]
-	name = Dmitry Cheryasv
-	email = dmitry.cheryasov@gmail.com
+    name = Dmitry Cheryasov (default)
+    email = dmitry.cheryasov@gmail.com
 [color]
     filemode = false
     diff = auto
@@ -40,3 +40,13 @@
     untracked = yellow dim
 [push]
     default = simple
+
+[include]
+  path = ~/work/.gitconfig.aliases
+
+# Included files overwrite anything above.
+[includeIf "gitdir:~/personal/"]
+    path = ~/personal/.gitconfig.include
+
+[includeIf "gitdir:~/work/"]
+    path = ~/work/.gitconfig.include
