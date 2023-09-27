@@ -2,9 +2,8 @@
     # This sets user.email, user.signingKey, and github-relaed values.
     path = ~/.gitconfig.id
 [user]
-    name = Dmitry Cheryasov
-# Email is in include.
-#    email = dmitry@clicktherapeutics.com
+    name = Dmitry Cheryasov (default)
+    email = dmitry.cheryasov@gmail.com
 [color]
     filemode = false
     diff = auto
@@ -79,13 +78,20 @@
     unmerged = brightmagenta bold
 
 [push]
-	default = current
+    default = simple
+
 [diff]
 	tool = meld
 	algorithm = patience
 [merge]
 	tool = meld
-[cola]
-	fontdiff = DejaVu Sans Mono,11,-1,5,50,0,0,0,0,0
-[branch]
-	autosetuprebase = always
+
+[include]
+  path = ~/work/.gitconfig.aliases
+
+# Included files overwrite anything above.
+[includeIf "gitdir:~/personal/"]
+    path = ~/personal/.gitconfig.include
+
+[includeIf "gitdir:~/work/"]
+    path = ~/work/.gitconfig.include
