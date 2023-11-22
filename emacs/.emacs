@@ -94,6 +94,7 @@
  '(markdown-command "/usr/local/bin/pandoc --from=markdown --to=html")
  '(org-agenda-window-setup 'other-window)
  '(org-drawers '("PROPERTIES" "CLOCK" "LOGBOOK" "RESULTS" "MORE"))
+ '(org-edit-src-content-indentation 0)
  '(org-ellipsis " ▼")
  '(org-pretty-entities nil)
  '(org-priority-faces '((67 . "firebrick4") (65 . "cyan")))
