@@ -59,12 +59,14 @@ Y_50_D=$(( ${desktop_h} / 2 + 2 * ${border} ))
 
 win_adjust_horiz() {
     xdotool \
+        windowstate --remove MAXIMIZED_HORZ ${active_window} \
         windowmove ${active_window} $1 ${yd} \
         windowsize ${active_window} $2 h
 }
 
 win_adjust_vert() {
     xdotool \
+        windowstate --remove MAXIMIZED_VERT ${active_window}  \
         windowmove ${active_window} ${xd} $1 \
         windowsize ${active_window} w $2
 }
