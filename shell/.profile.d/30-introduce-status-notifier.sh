@@ -35,5 +35,14 @@ function _notify_by_status() {
         local icon="dialog-error"  # Something red.
     fi
 
-    notify-send -i "${icon}" "${command}" "${message}"
+    # Maybe we can focus the terminal window that issued the command.
+    local buton_cmd=""
+    if [ -x "$(which wmctrl)" ] && [ -n "${WINDOWID}" ]; then
+        button_cmd='--action focus=Show'  # NOTE: Could add a "Dismiss" button, but why?
+    fi
+
+    local response=$(notify-send -i "${icon}" ${button_cmd} "${command}" "${message}")
+    if [ "$response" == "focus" ]; then
+        wmctrl -i -a ${WINDOWID}
+    fi
 }
