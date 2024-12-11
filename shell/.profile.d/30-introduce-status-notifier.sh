@@ -22,6 +22,19 @@ function NN() {
     (exit ${status})
 }
 
+function _notify_accept_button_response() {
+    local windowid=$1
+    local icon="${2-error}"
+    local button_cmd="${3-OK}"
+    local command="${4-unspecified_command}"
+    local message="${5-unspecified_message}"
+    # The below only waits for user input if button_cmd is not empty.
+    local response=$(notify-send -i "${icon}" ${button_cmd} "${command}" "${message}")
+    if [ "$response" == "focus" ]; then
+        wmctrl -i -a ${WINDOWID}
+    fi
+}
+
 function _notify_by_status() {
     local status="$1"
     local time_clause="$2"
@@ -41,8 +54,11 @@ function _notify_by_status() {
         button_cmd='--action focus=Show'  # NOTE: Could add a "Dismiss" button, but why?
     fi
 
-    local response=$(notify-send -i "${icon}" ${button_cmd} "${command}" "${message}")
-    if [ "$response" == "focus" ]; then
-        wmctrl -i -a ${WINDOWID}
-    fi
+    (   # Async wait for the button click.
+        # Along the lines of https://unix.stackexchange.com/a/452701/3633
+        set +m  # Disable job control to prevent the '[n] Done' message.
+        {
+            2>&3 _notify_accept_button_response "${WINDOWID}" "${icon}" "${button_cmd}" "${command}" "${message}" &
+        } 3>&2 2>/dev/null
+    )
 }
