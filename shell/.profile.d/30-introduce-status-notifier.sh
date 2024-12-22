@@ -51,7 +51,7 @@ function _notify_by_status() {
     # Maybe we can focus the terminal window that issued the command.
     local buton_cmd=""
     if [ -x "$(which wmctrl)" ] && [ -n "${WINDOWID}" ]; then
-        button_cmd='--action focus=Show'  # NOTE: Could add a "Dismiss" button, but why?
+        button_cmd='--action=focus=Show'  # NOTE: Could add a "Dismiss" button, but why?
     fi
 
     (   # Async wait for the button click.
