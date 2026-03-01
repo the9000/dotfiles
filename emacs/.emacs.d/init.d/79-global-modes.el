@@ -24,7 +24,7 @@
 ;; Editing affordances
 (electric-pair-mode t)
 ;; (outline-mode t)
-(ido-mode t)
+;; (ido-mode t) ;; Replaced by vertico.
 
 ;; Always show matching pairs.
 (show-paren-mode 1)
