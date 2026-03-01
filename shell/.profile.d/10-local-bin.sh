@@ -1,4 +1,8 @@
-# Add ~/bin/ to path if it's there.
+# Add ~/bin/ and ~/.local/bin/ to path if present.
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
