@@ -119,7 +119,41 @@
  '(package-archives
    '(("melpa" . "https://melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")))
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(ace-jump-mode ag ai-code auto-virtualenv auto-virtualenvwrapper
+                   browse-kill-ring ccls claude-code clojure-mode
+                   color-theme-modern column-enforce-mode company-ghci
+                   company-org-block company-shell company-web
+                   consult-ag consult-company consult-flyspell
+                   crontab-mode csv-mode devcontainer difftastic
+                   docker-compose-mode dockerfile-mode dumb-jump
+                   editorconfig elisp-slime-nav elixir-mode
+                   elixir-ts-mode expand-region
+                   find-file-in-repository fixmee flx
+                   flycheck-color-mode-line flycheck-kotlin
+                   flycheck-mypy flyspell-lazy forge fzf
+                   git-commit-ts-mode go-playground god-mode
+                   gradle-mode groovy-mode highlight-indent-guides
+                   highlight-symbol htmlize ibuffer-projectile
+                   ibuffer-vc java-snippets jira-markup-mode
+                   js-react-redux-yasnippets js2-mode json-navigator
+                   json-par json5-ts-mode just-mode just-ts-mode
+                   kotlin-mode kotlin-ts-mode ligature lsp-biome
+                   lsp-haskell lsp-java lsp-jedi lsp-pyright lsp-ui
+                   lua-mode magit-delta magit-diff-flycheck
+                   magit-todos markdown-ts-mode mermaid-ts-mode
+                   multi-term nlinum nodejs-repl orderless origami
+                   outline-indent ox-jira parinfer-rust-mode pet
+                   pip-requirements popwin projectile-variable
+                   protobuf-mode protobuf-ts-mode pydoc pylint pytest
+                   python-black python-docstring python-mode quelpa
+                   recently restclient rust-mode sass-mode scad-mode
+                   smart-jump sql-indent string-inflection
+                   switchy-window toml-mode tree-sitter-indent
+                   tree-sitter-ispell treemacs-projectile
+                   treesit-ispell ts-comint uv-mode vc-msg vertico
+                   web-mode wfnames whole-line-or-region winnow winum
+                   yasnippet-snippets))
  '(package-vc-selected-packages '((lsp-biome :url "https://github.com/cxa/lsp-biome")))
  '(py-indent-offset 2)
  '(py-split-window-on-execute t)
