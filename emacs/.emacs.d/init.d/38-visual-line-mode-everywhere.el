@@ -1,4 +1,4 @@
-i;; Enable visual-line-mode everywhere words are involved.
+;; Enable visual-line-mode everywhere words are involved.
 
 (defun my/visual-line-mode-enable () (visual-line-mode 1))
 
