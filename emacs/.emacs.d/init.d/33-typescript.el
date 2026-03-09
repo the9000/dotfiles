@@ -48,3 +48,5 @@
          ))
       )
   )
+
+(if (fboundp 'lsp) (add-hook 'typescript-ts-base-mode-hook 'lsp))
