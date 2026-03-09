@@ -2,8 +2,9 @@
 
 show_menu() {
     cat <<EOF | xmenu
-D 1 minute	1 minute:60
-F 5 minutes	5 minutes:300
+S 1 minute	1 minute:60
+D 5 minutes	5 minutes:300
+F 10 minutes	10 minute:600
 G 15 minutes	15 minute:900
 H Half-hour	Half-hour:1200
 J 45 minutes	45 minutes:2250
