@@ -222,6 +222,7 @@
  '(venv-location "~/venvs/")
  '(vertico-flat-annotate t)
  '(vertico-mode t)
+ '(visual-line-fringe-indicators '(left-curly-arrow nil))
  '(warning-suppress-types '((comp) (comp)))
  '(web-mode-code-indent-offset 2)
  '(web-mode-css-indent-offset 2)
