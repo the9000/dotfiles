@@ -71,9 +71,9 @@
   ;; NOTE: Loading org-tempo here does not work!
   :bind
   (:map org-mode-map
-        ("C-x x <up>" . my/org-collapse-peers-backward-all)
-        ("C-x x ." . 'my/org-collapse-peers-forward-done)
-        ("C-x x ," . 'my/org-collapse-peers-backward-done)
+        ("\C-x x <up>" . my/org-collapse-peers-backward-all)
+        ("\C-x x ." . 'my/org-collapse-peers-forward-done)
+        ("\C-x x ," . 'my/org-collapse-peers-backward-done)
   )
 )
 
@@ -81,7 +81,7 @@
 (use-package company
     :hook prog-mode  ;; Auto-enable in prog mode.
     :bind (:map prog-mode-map
-           ("C-;" . company-complete)
+           ("\C-;" . company-complete)
            )
 )
 
